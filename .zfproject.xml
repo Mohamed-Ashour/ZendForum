@@ -65,6 +65,7 @@
         <formFile formName="Forum"/>
         <formFile formName="Thread"/>
         <formFile formName="Reply"/>
+        <formFile formName="Registeration"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
