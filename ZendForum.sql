@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2016 at 08:56 PM
+-- Generation Time: Apr 19, 2016 at 01:09 AM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 CREATE TABLE IF NOT EXISTS `forum` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `descreption` varchar(100) NOT NULL,
   `is_opened` tinyint(1) NOT NULL DEFAULT '1',
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -89,9 +90,11 @@ CREATE TABLE IF NOT EXISTS `thread` (
   `is_opened` tinyint(1) NOT NULL DEFAULT '1',
   `forum_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `forum_id` (`forum_id`,`user_id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -136,6 +139,7 @@ ALTER TABLE `reply`
 -- Constraints for table `thread`
 --
 ALTER TABLE `thread`
+  ADD CONSTRAINT `thread_ibfk_3` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `thread_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `thread_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
