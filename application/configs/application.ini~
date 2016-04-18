@@ -13,7 +13,6 @@ resources.db.params.host = "localhost"
 resources.db.params.username = "root"
 resources.db.params.password = "iti"
 resources.db.params.dbname = "ZendForum"
-resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
 [staging : production]
 
 [testing : production]
