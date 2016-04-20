@@ -16,6 +16,7 @@
           <actionMethod actionName="add"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
+          <actionMethod actionName="login"/>
         </controllerFile>
         <controllerFile controllerName="Posts">
           <actionMethod actionName="index"/>
@@ -65,6 +66,7 @@
         <formFile formName="Forum"/>
         <formFile formName="Thread"/>
         <formFile formName="Reply"/>
+        <formFile formName="Registeration"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -168,6 +170,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="System">
             <viewScriptFile forActionName="changeState"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Users">
+            <viewScriptFile forActionName="login"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
