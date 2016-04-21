@@ -2,7 +2,9 @@ footer {
 	background-color: #f6f6f2;
 	text-align: center;
 	height: 60px;
-
+	color:white;
+	margin-top:20px;
+	padding-top: 20px;
 }
 
 .right 	{
@@ -21,3 +23,9 @@ footer {
 .left-margin {
 	margin: 10px 0 15px 25px;
 }
+
+.facebook_img{
+	margin-left:10px; 
+}
+
+
