@@ -1,0 +1,23 @@
+footer {
+	background-color: #f6f6f2;
+	text-align: center;
+	height: 60px;
+
+}
+
+.right 	{
+	float: right;
+	margin-right: 5px; 
+}
+
+.jumbotron {
+	height: 290px;
+}
+
+.footer-text {
+	padding-top: 15px;
+}
+
+.left-margin {
+	margin: 10px 0 15px 25px;
+}
