@@ -15,6 +15,7 @@ class ThreadsController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->view->threads = $this->model->listThreads();
     }
 
     public function addAction()

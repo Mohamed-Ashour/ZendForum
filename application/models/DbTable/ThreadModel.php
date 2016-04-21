@@ -19,5 +19,11 @@ class Application_Model_DbTable_ThreadModel extends Zend_Db_Table_Abstract
 		return $row->save();
 	
 	}
+
+
+	function listThreads(){
+		return $this->fetchAll()->toArray();
+	}
+
 }
 

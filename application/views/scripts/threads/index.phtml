@@ -2,3 +2,34 @@
 <div id="view-content">
 	<p>View script for controller <b>Threads</b> and script/action name <b>index</b></p>
 </div>
+
+<?php if($this->threads) { 
+
+	
+
+	for($i=0; $i<count($this->threads); $i++){
+		
+		echo"<div class='panel panel-default'>";
+	    echo "<div class='panel-heading'> post no. ".$this->threads[$i]['id']."</div>";
+	    echo "<div class='panel-body'>";
+	    echo "</div>";
+
+		echo "<table border=1 class='table table-striped'>" ;	
+		//echo '<tr><td> Id: '.$this->threads[$i]['id'].'</td></tr>';
+		echo '<tr><td>title: '.$this->threads[$i]['title'].'</td></tr>';
+		echo '<tr><td>text: '.$this->threads[$i]['body'].'</td></tr>';
+		echo '<tr><td> <a  href="'.$this->baseUrl().'/index.php/blog-x/delete/id/'.$this->threads[$i]['id'].'"> <button class="btn btn-danger" >Delete</button> </a>';
+		echo '<a href="'.$this->baseUrl().'/index.php/blog-x/edit/id/'.$this->threads[$i]['id'].'"><button class="btn btn-primary"> Edit </button></a>';
+
+		echo '<a href="'.$this->baseUrl().'/index.php/blog-x/details/id/'.$this->threads[$i]['id'].'"><button class="btn btn-success"> more details </button></a></td></tr>';
+		
+		echo "</tr>";
+		//echo str_repeat('*', 100).'<br />';		
+		echo "</table>";
+
+		echo "</div>";
+
+		echo "<br>";
+	}
+	
+}
