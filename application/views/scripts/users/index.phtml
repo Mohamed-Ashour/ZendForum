@@ -4,7 +4,7 @@
 </div>
 
 
-<a href="<?php echo $this->baseUrl()?>/users/add"> Add User </a>
+<a href="<?php echo $this->baseUrl('/index.php/users/add')?>"> Add User </a>
 <br><br>
 
 <table class="table">
@@ -35,8 +35,8 @@
 			echo "<td>". $this->users[$i]['is_admin'] ."</td>";
 			echo "<td>". $this->users[$i]['is_banned'] ."</td>";
 
-			echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/users/edit/id/". $this->users[$i]['id'] ."' > Edit </a> ";
-			echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/users/delete/id/". $this->users[$i]['id'] ."' >Delete</a></td>";
+			echo "<td> <a class='btn btn-info' href='". $this->baseUrl("index.php/users/edit/id/". $this->users[$i]['id']) . "' > Edit </a> ";
+			echo "<a class='btn btn-danger' href='". $this->baseUrl("/users/delete/id/") . $this->users[$i]['id'] ."' >Delete</a></td>";
 			echo "<tr>";
 		}
 	}

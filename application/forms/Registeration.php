@@ -36,7 +36,7 @@ class Application_Form_Registeration extends Zend_Form
 
 		$image = new Zend_Form_Element_File('image');
 		$image->setlabel('Upload your image');
-		$image->setDestination('uploads/images');
+		$image->setDestination('uploads/images/');
 		$image->setRequired(false);
 		$image->addValidator('Extension', false, 'jpg,png,gif');
 		$image->setAttrib("class","btn btn-success");
