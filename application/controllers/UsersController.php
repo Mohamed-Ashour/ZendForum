@@ -2,7 +2,8 @@
 
 class UsersController extends Zend_Controller_Action
 {
-	private $userModel;
+
+    private $userModel = null;
 
     public function init()
     {
@@ -67,6 +68,7 @@ class UsersController extends Zend_Controller_Action
             $this->redirect('users');
         }
     }
+
     public function loginAction()
     {
         // action body
@@ -111,5 +113,14 @@ class UsersController extends Zend_Controller_Action
 
     }
 
+    public function logoutAction()
+    {
+        // action body
+        Zend_Session::destroy();
+        $this->redirect('users/login');
+    }
+
 
 }
+
+
