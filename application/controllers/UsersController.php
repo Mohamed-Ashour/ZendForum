@@ -71,33 +71,32 @@ class UsersController extends Zend_Controller_Action
     {
         // action body
         if($this->getRequest()->isPost()){
-        
-            $username= $this->_request->getParam('username'); // da gayly men el form 
-            $password= $this->_request->getParam('password'); // da gayly men el form 
-            
+
+            $username= $this->_request->getParam('username'); // da gayly men el form
+            $password= $this->_request->getParam('password'); // da gayly men el form
+
             // get the default db adapter
             $db =Zend_Db_Table::getDefaultAdapter();
-            
+
             //create the auth adapter
             $authAdapter = new
-            Zend_Auth_Adapter_DbTable($db,'user','username', 'password'); 
+            Zend_Auth_Adapter_DbTable($db,'user','username', 'password');
                                    //($db,'table_name' , 'user name' , 'password')
                                    // asama2hom fe le db
-            
+
             //set the email and password
-            $authAdapter->setIdentity($username); 
+            $authAdapter->setIdentity($username);
             $authAdapter->setCredential(md5($password));
             $result = $authAdapter->authenticate();
-            
+
             if ($result->isValid()) {
-        
+
                 //if the user is valid register his info in session
                 $auth = Zend_Auth::getInstance();
                 $storage = $auth->getStorage();
                 $storage->write($authAdapter->getResultRowObject(array('id' , 'email' , 'username' , 'password','image','country','gender','signature','is_admin','is_banned')));
                 $this->redirect('index');
         
-
             }else{
                 echo "user doesnt exist !!" ;
                 $formLogObj = new Application_Form_Login();
@@ -105,7 +104,7 @@ class UsersController extends Zend_Controller_Action
             }
 
         }else{
-            
+
             $formLogObj = new Application_Form_Login();
             $this->view->form=$formLogObj;
         }

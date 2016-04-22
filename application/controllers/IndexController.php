@@ -5,7 +5,7 @@ class IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->view->hi = "hi";
     }
 
     public function indexAction()
@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action
 		$storage->read();
 
 		//var_dump($storage->read());
-		
+
 		$username= $storage->read()->username;
 		$id=$storage->read()->id;
 		$email=$storage->read()->email;
@@ -39,4 +39,3 @@ class IndexController extends Zend_Controller_Action
 
 
 }
-
