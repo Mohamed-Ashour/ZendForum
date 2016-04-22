@@ -1,6 +1,26 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Categories</b> and script/action name <b>index</b></p>
-</div>
 
-inside Categories index 
+<a class='btn btn-info' href="<?php echo $this->baseUrl()?>/index.php/Categories/add"> Add Category </a>
+<br><br>
+<table class="table">
+    <thead>
+       
+        <th>name</th>
+        <th>action</th>
+    </thead>
+
+<?php
+    if($this->Categories) {
+        for($i=0; $i< count($this->Categories); $i++) {
+            echo "<tr>";
+            echo "<td>". $this->Categories[$i]['name'] ."</td>";
+           
+            echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/index.php//Categories/edit/id/". $this->Categories[$i]['id'] ."' > Edit </a> ";
+            echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/index.php//Categories/delete/id/". $this->Categories[$i]['id'] ."' > Delete </a></td>";
+            echo "<tr>";
+        }
+    }
+
+?>
+
+</table>
