@@ -1,13 +1,11 @@
 <br /><br />
-<<<<<<< HEAD
 
-<a class='btn btn-info' href="<?php echo $this->baseUrl()?>/Categories/add"> Add Category </a>
+<a class='btn btn-info' href="<?php echo $this->baseUrl()?>/index.php/Categories/add"> Add Category </a>
 <br><br>
 <table class="table">
     <thead>
        
         <th>name</th>
-        <th>forums</th>
         <th>action</th>
     </thead>
 
@@ -16,11 +14,9 @@
         for($i=0; $i< count($this->Categories); $i++) {
             echo "<tr>";
             echo "<td>". $this->Categories[$i]['name'] ."</td>";
-
-            echo "<td> <a class='btn btn-success' href='". $this->baseUrl() ."/forums/category-forum/category/". $this->Categories[$i]['id'] ."' > ". $this->Categories[$i]['forums'] . " Forums </a> </td>";
            
-            echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/Categories/edit/id/". $this->Categories[$i]['id'] ."' > Edit </a> ";
-            echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/Categories/delete/id/". $this->Categories[$i]['id'] ."' > Delete </a></td>";
+            echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/index.php//Categories/edit/id/". $this->Categories[$i]['id'] ."' > Edit </a> ";
+            echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/index.php//Categories/delete/id/". $this->Categories[$i]['id'] ."' > Delete </a></td>";
             echo "<tr>";
         }
     }
@@ -28,10 +24,3 @@
 ?>
 
 </table>
-=======
-<div id="view-content">
-	<p>View script for controller <b>Categories</b> and script/action name <b>index</b></p>
-</div>
-
-inside Categories index 
->>>>>>> 513dd54642b076b45c0859dc83c77b53cb846549

@@ -13,8 +13,8 @@
 		//	echo "<p><strong>". $this->forums[$i]['commenter'] ." :</strong></p>";
 			echo "<p class='left-margin'>". $this->forums[$i]['name'] ."</p>";
 			echo "";
-			echo "<p> <a class='btn btn-info btn-sm' href='". $this->baseUrl() ."/forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";
-			echo "<a class='btn btn-danger btn-sm' href='". $this->baseUrl() ."/forums/delete/id/". $this->forums[$i]['id'] ."' > Delete </a> 
+			echo "<p> <a class='btn btn-info btn-sm' href='". $this->baseUrl() ."/index.php//forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";
+			echo "<a class='btn btn-danger btn-sm' href='". $this->baseUrl() ."/index.php//forums/delete/id/". $this->forums[$i]['id'] ."' > Delete </a> 
 			echo "</div>";
 
 		}

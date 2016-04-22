@@ -18,8 +18,8 @@
 				echo "<td>". $this->forums[$i]['id'] ."</td>";
 				echo "<td>". $this->forums[$i]['name'] ."</td>";
 				echo "<td>". $this->forums[$i]['descreption'] ."</td>";
-				echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";
-				echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/forums/delete/id/". $this->forums[$i]['id'] ."' > Delete </a></td>";
+				echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/index.php/forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";
+				echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/index.php/forums/delete/id/". $this->forums[$i]['id'] ."' > Delete </a></td>";
 				echo "<tr>";
 			}
 		}

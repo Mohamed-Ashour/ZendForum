@@ -1,0 +1,12 @@
+<a href="<?=$this->baseUrl()?>/post/">Category</a>  
+==========<br/><br/>
+
+<form method="post" id="addPostForm">
+    <label for="title">Title:</label><br/>
+    <input id="title" name="name" value="<?= isset($this->Category_info ['name']) ? $this->Category_info ['name'] : ""; ?>" />
+    <br /><br /><br />
+
+    
+
+    <input type="submit" value="Publish" /><input type="reset" name="reset" value="Reset" />
+</form>
