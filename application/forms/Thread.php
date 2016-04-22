@@ -38,7 +38,7 @@ class Application_Form_Thread extends Zend_Form
 		$is_opened->setAttrib('class','form-control');
 
 
-		$forumId = new Zend_Form_Element_Text("forumId");
+		$forumId = new Zend_Form_Element_Text("forum_id");
 		$forumId->setRequired();
 		//$forumId->addValidator(new Zend_Validate_Alpha());
 		$forumId->setlabel("forum id:");
@@ -46,7 +46,7 @@ class Application_Form_Thread extends Zend_Form
 		$forumId->setAttrib("placeholder","Enter your forum Id");
 
 
-		$categoryId = new Zend_Form_Element_Text("categoryId");
+		$categoryId = new Zend_Form_Element_Text("category_id");
 		$categoryId->setRequired();
 		//$categoryId->addValidator(new Zend_Validate_Alpha());
 		$categoryId->setlabel("category id:");

@@ -42,11 +42,39 @@ class ThreadsController extends Zend_Controller_Action
     public function editAction()
     {
         // action body
+        $id = $this->getRequest()->getParam('id');
+        
+        $form = new Application_Form_Thread();
+        
+        $thread = $this->model->getThreadById($id);
+        $form->populate($thread[0]);
+        print_r($thread[0]);
+        //$form->setAction("users/index");
+        $this->view->form = $form;
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getParams();
+            if($form->isValid($data)){
+                if ($this->model->editThread($id , $data))
+                    $this->redirect('threads/index');
+            }   
+        }   
+        
+        $this->render('form');
     }
 
     public function deleteAction()
     {
         // action body
+        $id = $this->getRequest()->getParam('id');
+        
+        if($id){
+         if ($this->model->deleteThread($id))
+            $this->redirect('threads/index');
+            
+        } else {
+            $this->redirect('threads/index');
+        }
     }
 
 
