@@ -1,4 +1,46 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Users</b> and script/action name <b>index</b></p>
+	<h1>Users</h1>
 </div>
+
+
+<a href="<?php echo $this->baseUrl('/index.php/users/add')?>"> Add User </a>
+<br><br>
+
+<table class="table">
+	<thead>
+		<th>id</th>
+		<th>username</th>
+		<th>email</th>
+		<th>image</th>
+		<th>country</th>
+		<th>gender</th>
+		<th>signature</th>
+		<th>admin</th>
+		<th>banned</th>
+		<th>action</th>
+	</thead>
+
+<?php
+	if($this->users) {
+		for($i=0; $i< count($this->users); $i++) {
+			echo "<tr>";
+			echo "<td>". $this->users[$i]['id'] ."</td>";
+			echo "<td>". $this->users[$i]['username'] ."</td>";
+			echo "<td>". $this->users[$i]['email'] ."</td>";
+			echo "<td><img src='". $this->baseUrl() .'/'. $this->users[$i]['image'] ."' height='70px'></td>";
+			echo "<td>". $this->users[$i]['country'] ."</td>";
+			echo "<td>". $this->users[$i]['gender'] ."</td>";
+			echo "<td>". $this->users[$i]['signature'] ."</td>";
+			echo "<td>". $this->users[$i]['is_admin'] ."</td>";
+			echo "<td>". $this->users[$i]['is_banned'] ."</td>";
+
+			echo "<td> <a class='btn btn-info' href='". $this->baseUrl("index.php/users/edit/id/". $this->users[$i]['id']) . "' > Edit </a> ";
+			echo "<a class='btn btn-danger' href='". $this->baseUrl("/users/delete/id/") . $this->users[$i]['id'] ."' >Delete</a></td>";
+			echo "<tr>";
+		}
+	}
+
+?>
+
+</table>

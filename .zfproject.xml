@@ -16,6 +16,8 @@
           <actionMethod actionName="add"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
+          <actionMethod actionName="login"/>
+          <actionMethod actionName="logout"/>
         </controllerFile>
         <controllerFile controllerName="Posts">
           <actionMethod actionName="index"/>
@@ -169,6 +171,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="System">
             <viewScriptFile forActionName="changeState"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Users">
+            <viewScriptFile forActionName="login"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Users">
+            <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
