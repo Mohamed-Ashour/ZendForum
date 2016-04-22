@@ -1,7 +1,8 @@
 
 
 <nav class="navbar navbar-inverse bg-faded">
-  <a class="navbar-brand" href="#">3della</a>
+<div class="navbar-header">
+  <a class="navbar-brand" href="<?php echo $this->baseUrl('/')?>">3della</a>
   <ul class="nav navbar-nav">
     <li class="nav-item">
       <a class="nav-link" href="<?php echo $this->baseUrl('index.php/admin')?>">Home</a>
@@ -18,10 +19,6 @@
     <li class="nav-item">
       <a class="nav-link" href="<?php echo $this->baseUrl('index.php/threads')?>">Threads</a>
     </li>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo $this->baseUrl('index.php/users/logout')?>">logout</a>
-    </li>
 
   </ul>
   <ul class="nav navbar-nav navbar-right">
@@ -29,8 +26,9 @@
 	  	<img src='<?php echo $this->baseUrl("/static/img/admin.png")?>' height='50px'>
 	  </li>
 	  <li class="nav-item padding-10">
-		  <a class="nav-link" href="<?php echo $this->baseUrl('index.php/threads')?>">Logout</a>
+		  <a class="nav-link" href="<?php echo $this->baseUrl('index.php/users/logout')?>">Logout</a>
 	  </li>
   </ul>
 
+</div>
 </nav>

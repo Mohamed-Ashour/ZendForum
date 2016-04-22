@@ -13,6 +13,7 @@ class SystemController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->SystemModel->changeState();
+		$this->redirect('Admin');
     }
 
 

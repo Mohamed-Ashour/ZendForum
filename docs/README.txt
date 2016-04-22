@@ -14,13 +14,13 @@ Setting Up Your VHOST
 The following is a sample VHOST you might want to consider for your project.
 
 <VirtualHost *:80>
-   DocumentRoot "/var/www/html/zend_project/ZendForum/public"
+   DocumentRoot "/var/www/html/zend_pojects/ZendForum/public"
    ServerName ZendForum.local
 
    # This should be omitted in the production environment
    SetEnv APPLICATION_ENV development
 
-   <Directory "/var/www/html/zend_project/ZendForum/public">
+   <Directory "/var/www/html/zend_pojects/ZendForum/public">
        Options Indexes MultiViews FollowSymLinks
        AllowOverride All
        Order allow,deny

@@ -1,1 +1,16 @@
+<h1>System</h1>
+<?php
+	if($this->state) {
 
+		echo '<a href="'.$this->baseUrl('index.php/system').'"><img src="'. $this->baseUrl('/static/img/on.png').'" height="40px"/></a>';
+	}
+	else {
+		echo '<a href="'.$this->baseUrl('index.php/system').'"><img src="'. $this->baseUrl('/static/img/off.png').'" height="40px"/></a>';
+	}
+
+echo "<br><br>";
+echo "<h2>Users: <small>".$this->usersCount."</small></h2><hr>";
+echo "<h2>Categories: <small>".$this->categoriesCount."</small></h2><hr>";
+echo "<h2>Forums: <small>".$this->forumsCount."</small></h2><hr>";
+echo "<h2>Threads: <small>".$this->threadsCount."</small></h2><hr>";
+echo "<h2>Replies: <small>".$this->repliesCount."</small></h2>";
