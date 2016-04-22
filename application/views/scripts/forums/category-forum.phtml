@@ -1,0 +1,33 @@
+<br /><br />
+<div id="view-content">
+
+	
+	<br><br>
+	<table class="table">
+		<thead>
+			<th>id</th>
+			<th>name</th>
+			<th>descreption</th>
+			<th>action</th>
+		</thead>
+
+	<?php
+		if($this->forums) {
+			for($i=0; $i< count($this->forums); $i++) {
+				echo "<tr>";
+				echo "<td>". $this->forums[$i]['id'] ."</td>";
+				echo "<td>". $this->forums[$i]['name'] ."</td>";
+				echo "<td>". $this->forums[$i]['descreption'] ."</td>";
+				echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";
+				echo "<a class='btn btn-danger' href='". $this->baseUrl() ."/forums/delete/id/". $this->forums[$i]['id'] ."' > Delete </a></td>";
+				echo "<tr>";
+			}
+		}
+
+	?>
+
+	</table>
+
+
+
+</div>

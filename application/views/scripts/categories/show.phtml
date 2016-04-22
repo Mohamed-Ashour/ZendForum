@@ -1,0 +1,24 @@
+
+<div id="view-content">
+	<h1><?php echo $this->Category['name']; ?></h1><br>
+	
+		<?php echo $this->form; ?>
+
+
+	<?php
+
+	if($this->forums) {
+		for ( $i=0; $i< count($this->forums); $i++ ) {
+			echo "<div class='well'>";
+		//	echo "<p><strong>". $this->forums[$i]['commenter'] ." :</strong></p>";
+			echo "<p class='left-margin'>". $this->forums[$i]['name'] ."</p>";
+			echo "";
+			echo "<p> <a class='btn btn-info btn-sm' href='". $this->baseUrl() ."/forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";
+			echo "<a class='btn btn-danger btn-sm' href='". $this->baseUrl() ."/forums/delete/id/". $this->forums[$i]['id'] ."' > Delete </a> 
+			echo "</div>";
+
+		}
+	}
+
+	?>
+</div>
