@@ -3,23 +3,17 @@
 class SystemController extends Zend_Controller_Action
 {
 
+	private $SystemModel;
+
     public function init()
     {
-        /* Initialize action controller here */
+        $this->SystemModel = new Application_Model_DbTable_SystemModel();
     }
 
     public function indexAction()
     {
-        // action body
-    }
-
-    public function changeStateAction()
-    {
-        // action body
+        $this->SystemModel->changeState();
     }
 
 
 }
-
-
-
