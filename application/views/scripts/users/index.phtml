@@ -32,11 +32,19 @@
 			echo "<td>". $this->users[$i]['country'] ."</td>";
 			echo "<td>". $this->users[$i]['gender'] ."</td>";
 			echo "<td>". $this->users[$i]['signature'] ."</td>";
-			echo "<td>". $this->users[$i]['is_admin'] ."</td>";
-			echo "<td>". $this->users[$i]['is_banned'] ."</td>";
-
+			if ($this->users[$i]['is_admin']==1) {
+				echo "<td>yes</td>";
+			}else{
+				echo "<td> -- </td>";
+			}
+			
+			if ($this->users[$i]['is_banned']==1) {
+				echo "<td>"."yes"."</td>";
+			}else{
+				echo "<td>"."--"."</td>";
+			}
 			echo "<td> <a class='btn btn-info' href='". $this->baseUrl("index.php/users/edit/id/". $this->users[$i]['id']) . "' > Edit </a> ";
-			echo "<a class='btn btn-danger' href='". $this->baseUrl("/users/delete/id/") . $this->users[$i]['id'] ."' >Delete</a></td>";
+			echo "<a class='btn btn-danger' href='". $this->baseUrl("index.php/users/delete/id/") . $this->users[$i]['id'] ."' >Delete</a></td>";
 			echo "<tr>";
 		}
 	}

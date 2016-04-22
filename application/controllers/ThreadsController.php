@@ -4,18 +4,47 @@ class ThreadsController extends Zend_Controller_Action
 {
 
     private $model = null;
+    public static $ForumsModel;
+    public static $CategoryModel;
+    public static $UserModel ;
     
     public function init()
     {
         /* Initialize action controller here */
         $this->model = new Application_Model_DbTable_ThreadModel();
-        
+        $this->ForumsModel = new Application_Model_DbTable_ForumModel();
+        $this->CategoryModel = new Application_Model_DbTable_CategoryModel();
+        $this->UserModel = new Application_Model_DbTable_UserModel();
     }
 
     public function indexAction()
     {
         // action body
+
+        $category_info  = $this->model->listThreads();
+        for ($i=0; $i < count($category_info); $i++) { 
+            $name = $this->CategoryModel->selectCategoryById($category_info[$i]['category_id'])[0]['name'];
+           $category_info[$i]['category'] = $name;
+        }
+        
+        $forum_info  = $this->model->listThreads();
+        for ($i=0; $i < count($forum_info); $i++) { 
+            $nameforum = $this->ForumsModel->selectForumById($forum_info[$i]['forum_id'])[0]['name'];
+           $forum_info[$i]['forum'] = $nameforum;
+        }
+
+        $user_info = $this->model->listThreads();
+        for ($i=0; $i <count($user_info) ; $i++) { 
+            # code...
+            $username= $this->UserModel->getUserById($user_info[$i]['user_id'])[0]['username'];
+            $user_info[$i]['username'] = $username;
+        }
+
+        $this->view->users=$user_info;
+        $this->view->forums= $forum_info ;
+        $this->view->categories= $category_info ;
         $this->view->threads = $this->model->listThreads();
+        
     }
 
     public function addAction()
@@ -25,10 +54,31 @@ class ThreadsController extends Zend_Controller_Action
         $data = $this->getRequest()->getParams();
         $form = new Application_Form_Thread();
         
+        $categories = $this->CategoryModel->selectAllCategory();
+        
+        for ($i=0; $i < count($categories); $i++) { 
+            $options[$categories[$i]['id']] = $categories[$i]['name'];
+        }
+        $form->category_id->addMultiOptions($options);
+
+        $forums = $this->ForumsModel->selectAllForum();
+        
+        for ($i=0; $i < count($forums); $i++) { 
+            $options[$forums[$i]['id']] = $forums[$i]['name'];
+        }
+        $form->forum_id->addMultiOptions($options);
+
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $storage->read();
+        $userId=$storage->read()->id;
+        echo "this is the logged user idees ".$userId;
+        $this->view->id=$userId;
+
         if($this->getRequest()->isPost()){
             
             if($form->isValid($data)){
-            if ($this->model->addThread(1,$data))
+            if ($this->model->addThread($userId,$data))
             $this->redirect('threads/index');
             }   
         }
@@ -42,11 +92,54 @@ class ThreadsController extends Zend_Controller_Action
     public function editAction()
     {
         // action body
+        $id = $this->getRequest()->getParam('id');
+        
+        $form = new Application_Form_Thread();
+        
+        $categories = $this->CategoryModel->selectAllCategory();
+        
+        for ($i=0; $i < count($categories); $i++) { 
+            $options[$categories[$i]['id']] = $categories[$i]['name'];
+        }
+        $form->category_id->addMultiOptions($options);
+
+        $forums = $this->ForumsModel->selectAllForum();
+        
+        for ($i=0; $i < count($forums); $i++) { 
+            $options[$forums[$i]['id']] = $forums[$i]['name'];
+        }
+        $form->forum_id->addMultiOptions($options);
+
+
+        $thread = $this->model->getThreadById($id);
+        $form->populate($thread[0]);
+        print_r($thread[0]);
+        //$form->setAction("users/index");
+        $this->view->form = $form;
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getParams();
+            if($form->isValid($data)){
+                if ($this->model->editThread($id , $data))
+                    $this->redirect('threads/index');
+            }   
+        }   
+        
+        $this->render('form');
     }
 
     public function deleteAction()
     {
         // action body
+        $id = $this->getRequest()->getParam('id');
+        
+        if($id){
+         if ($this->model->deleteThread($id))
+            $this->redirect('threads/index');
+            
+        } else {
+            $this->redirect('threads/index');
+        }
     }
 
 
