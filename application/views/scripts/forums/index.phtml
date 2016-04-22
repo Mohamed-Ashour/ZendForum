@@ -18,7 +18,13 @@
             echo "<tr>";
             echo "<td>". $this->forums[$i]['name'] ."</td>";
             echo "<td>". $this->forums[$i]['descreption'] ."</td>";
-            echo "<td>". $this->forums[$i]['is_opened'] ."</td>";
+            if ($this->forums[$i]['is_opened']==1) {
+              # code...
+              echo "<td>"."opened"."</td>";
+            }else{
+              echo "<td>"."closed"."</td>";
+            }
+            
              echo "<td>". $this->forums[$i]['category'] ."</td>";
 
             echo "<td> <a class='btn btn-info' href='". $this->baseUrl() ."/index.php/forums/edit/id/". $this->forums[$i]['id'] ."' > Edit </a> ";

@@ -16,12 +16,12 @@
 		<th>id</th>
 		<th>title</th>
 		<th>body</th>
-		<th>date</th>
+		<th>date & time</th>
 		<th>is sticky</th>
 		<th>is opened</th>
-		<th>forum id</th>
+		<th>forum </th>
 		<th>user id</th>
-		<th>category id</th>
+		<th>category </th>
 		<th>actions</th>
 	</thead>
 
@@ -35,16 +35,31 @@
 				echo "<td>".$this->threads[$i]['title']."</td>";
 				echo "<td>".$this->threads[$i]['body']."</td>";
 				echo "<td>".$this->threads[$i]['date']."</td>";
-				echo "<td>".$this->threads[$i]['is_sticky']."</td>";
-				echo "<td>".$this->threads[$i]['is_opened']."</td>";
-				echo "<td>".$this->threads[$i]['forum_id']."</td>";
-				echo "<td>".$this->threads[$i]['user_id']."</td>";
-				echo "<td>".$this->threads[$i]['category_id']."</td>";
+				if ($this->threads[$i]['is_sticky'] == 1) {
+					# code...
+					echo "<td>"."sticky"."</td>";
+				}else{
+					echo "<td>"."closed"."</td>";
+				}
+				
+				if ($this->threads[$i]['is_opened'] == 1) {
+					# code...
+					echo "<td>"."opened"."</td>";
+				}else{
+					echo "<td>"."closed"."</td>";
+				}
+				echo "<td>"./*$this->threads[$i]['forum_id'] */$this->forums[$i]['forum']."</td>";
+				echo "<td>"./*$this->threads[$i]['user_id']*/ $this->users[$i]['username']."</td>";
+																			// ['username'] da men 3and el controller mesh 3and el database 	
+				echo "<td>"./*$this->threads[$i]['category_id']*/$this->categories[$i]['category']."</td>";
+				
+								
 				echo "<td><a class='btn btn-danger' href='".$this->baseUrl("index.php/threads/delete/id/").$this->threads[$i]['id']."'>delete</a>";
 				echo "<td> <a class='btn btn-info' href='". $this->baseUrl("index.php/threads/edit/id/". $this->threads[$i]['id']) . "' > Edit </a> ";
 				echo "</td>";
 				echo "</tr>";
 			}
+
 		}
 	?>
 </table>
