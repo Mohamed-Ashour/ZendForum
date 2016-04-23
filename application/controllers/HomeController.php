@@ -3,10 +3,14 @@
 class HomeController extends Zend_Controller_Action
 {
 
-	public static $ForumsModel;
-    public static $CategoryModel;
-    public static $UserModel ;
-    public static $ThreadModel ;
+    public static $ForumsModel = null;
+
+    public static $CategoryModel = null;
+
+    public static $UserModel = null;
+
+    public static $ThreadModel = null;
+
     public function init()
     {
         /* Initialize action controller here */
@@ -36,5 +40,22 @@ class HomeController extends Zend_Controller_Action
 
     }
 
+    public function forumAction()
+    {
+        $this->view->threads = $this->ThreadModel->listThreads();
+		$forums=$this->FormusModel->selectAllForum();
+
+		for ($i=0; $i < count($categories) ; $i++) {
+			$categories[$i]['forums'] = $this->ForumsModel->getCategoryForum($categories[$i]['id']);
+
+			for ($j=0; $j < count($categories[$i]['forums']) ; $j++) {
+				$categories[$i]['forums'][$j]['threads_count'] = count($this->ThreadModel->getForumThreads($categories[$i]['forums'][$j]['id']));
+			}
+		}
+		
+    }
+
 
 }
+
+

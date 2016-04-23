@@ -26,11 +26,19 @@ class UsersController extends Zend_Controller_Action
               'field' => 'email'
             )
         ));
+
+
+
         $this->view->form = $form;
         if($this->getRequest()->isPost()){
             if($form->isValid($data)){
-                if ($this->userModel->addUser($data))
-                    $this->redirect('users');
+                if($form->getElement('image')->receive())
+                {
+                    $data['image'] = $form->getElement('image')->getValue();
+                            
+                    if ($this->userModel->addUser($data))
+                        $this->redirect('users');
+                }
             }
         }
 		$this->view->title = 'Add User';
