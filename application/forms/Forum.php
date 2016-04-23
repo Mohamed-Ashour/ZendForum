@@ -33,9 +33,9 @@ class Application_Form_Forum extends Zend_Form
 		$is_opened->setRequired();
 		$is_opened->setlabel("Check Forum:");
 		$is_opened->addMultiOptions(array('1' => 'opened',
-										 '2' => 'closed'
+										 '0' => 'closed'
 										)
-											);
+									);
 		$is_opened->setAttrib("class","form-control");
 		$is_opened->setAttrib("placeholder","Choose your category");
 

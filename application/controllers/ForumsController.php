@@ -17,13 +17,15 @@ class ForumsController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->name = 'forums';
+        
+       $this->view->name = 'forums';
        $forums_info  = $this->ForumsModel->selectAllForum();
        for ($i=0; $i < count($forums_info); $i++) { 
             $name = $this->CategoryModel->selectCategoryById($forums_info[$i]['category_id'])[0]['name'];
            $forums_info[$i]['category'] = $name;
        }
        $this->view->forums= $forums_info ;
+       
     }
 
     public function addAction()
@@ -88,7 +90,7 @@ class ForumsController extends Zend_Controller_Action
             $data = $this->getRequest()->getPost();
             if($form->isValid($data)){
                 if ($this->ForumsModel-> editForum($data))
-                    $this->redirect('Categories');
+                    $this->redirect('forums');
             }
         }
 
