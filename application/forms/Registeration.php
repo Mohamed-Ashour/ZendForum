@@ -39,23 +39,12 @@ class Application_Form_Registeration extends Zend_Form
 		$image->setDestination(APPLICATION_PATH.'/../public/uploads/images/');
 		$image->setRequired(false);
 		$image->addValidator('Extension', false, 'jpg,png,gif');
-		$image->addValidator('Size', false, 2097152);  
-		$image->addValidator('Count', false, 1); 
+		$image->addValidator('Size', false, 2097152);
+		$image->addValidator('Count', false, 1);
 		$image->setAttrib("class","btn btn-success");
 		$image->setValueDisabled(true);
 
 
-
-		/* $image = new Zend_Form_Element_File('picture');
-      $image->setLabel('Upload an image:');
-    	$image->setDestination(APPLICATION_PATH.'/../public/user-uploads/');
-      $image->setRequired(true);
-  		$image->setMaxFileSize(2097152); // limits the filesize on the client side
-      	// $image->setDescription('Click Browse and click on the image file you would like to upload');
-        $image->addValidator('Count', false, 1);                // ensure only 1 file
-		$image->addValidator('Size', false, 2097152);            // limit to 10 meg
-		$image->addValidator('Extension', false, 'jpg,jpeg,png,gif');// only JPEG, PNG, and GIFs
-		$image->setValueDisabled(true);*/
 
 		$country = new Zend_Form_Element_Select("country");
 		$country->setRequired();
@@ -71,33 +60,34 @@ class Application_Form_Registeration extends Zend_Form
 		$gender = new Zend_Form_Element_Radio("gender");
 		$gender->setRequired();
 		$gender->setlabel("Gender:");
-		$gender->addMultiOptions(array('Male' => 'Male',
-										 'Female' => 'Female')
+		$gender->addMultiOptions(array('Male' => ' Male',
+										 'Female' => ' Female')
 									);
-		$gender->setAttrib("class","form-control");
-		$gender->setAttrib("placeholder","Choose your gender");
 
 		$signature= new Zend_Form_Element_Textarea("signature");
 		$signature->setRequired();
-		$signature->setAttrib('rows','8');
+		$signature->setAttrib('rows','7');
 		$signature->setAttrib('cols','27');
 		$signature->setAttrib('class','form-control');
 		$signature->setlabel("signature :");
 		$signature->setAttrib('placeholder','enter your signature');
 
-		$is_admin = new Zend_Form_Element_MultiCheckbox('is_admin', array(
-		    'multiOptions' => array(
-		        '1' => 'admin',
-		    )
-		));
+
+
+		$is_admin = new Zend_Form_Element_Select('is_admin');
+		$is_admin->addMultiOptions(array('0' => 'No',
+										 '1' => 'Yes'
+										)
+									);
 		$is_admin->setlabel("is admin :");
 		$is_admin->setAttrib('class','form-control');
 
-		$is_banned = new Zend_Form_Element_MultiCheckbox('is_banned', array(
-		    'multiOptions' => array(
-		        '1' => 'banned',
-		    )
-		));
+
+		$is_banned = new Zend_Form_Element_Select('is_banned');
+		$is_banned->addMultiOptions(array('0' => 'No',
+										 '1' => 'Yes'
+										)
+									);
 		$is_banned->setlabel("is banned :");
 		$is_banned->setAttrib('class','form-control');
 

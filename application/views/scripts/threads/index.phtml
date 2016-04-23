@@ -1,7 +1,5 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Threads</b> and script/action name <b>index</b></p>
-</div>
+
 
 
 
@@ -33,13 +31,13 @@
 				echo "<tr>";
 				echo "<td>".$this->threads[$i]['id']."</td>";
 				echo "<td>".$this->threads[$i]['title']."</td>";
-				
+
 				if ( strlen($this->threads[$i]['body']) > 40) {
 				echo "<td>". substr($this->threads[$i]['body'],0, 40 ) ." .... </td>";
-				}else{ 
-					echo "<td>". $this->threads[$i]['body'] ."</td>"; 
+				}else{
+					echo "<td>". $this->threads[$i]['body'] ."</td>";
 				}
-				
+
 				//echo "<td>".$this->threads[$i]['body']."</td>";
 				echo "<td>".$this->threads[$i]['date']."</td>";
 				if ($this->threads[$i]['is_sticky'] == 1) {

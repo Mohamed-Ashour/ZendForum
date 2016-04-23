@@ -14,6 +14,8 @@ class UsersController extends Zend_Controller_Action
     {
 		$this->view->title = 'Users';
         $this->view->users = $this->userModel->listUsers();
+		$identity = Zend_Auth::getInstance()->getIdentity();
+		var_dump($identity);
     }
 
     public function addAction()
@@ -34,8 +36,8 @@ class UsersController extends Zend_Controller_Action
             if($form->isValid($data)){
                 if($form->getElement('image')->receive())
                 {
-                    $data['image'] = $form->getElement('image')->getValue();
-                            
+                    $data['image'] = 'uploads/images/' . $form->getElement('image')->getValue();
+
                     if ($this->userModel->addUser($data))
                         $this->redirect('users');
                 }
@@ -106,7 +108,7 @@ class UsersController extends Zend_Controller_Action
                 $storage = $auth->getStorage();
                 $storage->write($authAdapter->getResultRowObject(array('id' , 'email' , 'username' , 'password','image','country','gender','signature','is_admin','is_banned')));
                 $this->redirect('index');
-        
+
             }else{
                 echo "user doesnt exist !!" ;
                 $formLogObj = new Application_Form_Login();
@@ -130,5 +132,3 @@ class UsersController extends Zend_Controller_Action
 
 
 }
-
-

@@ -4,7 +4,7 @@
 </div>
 
 
-<a href="<?php echo $this->baseUrl('/index.php/users/add')?>"> Add User </a>
+<a href="<?php echo $this->baseUrl('/index.php/users/add')?>" class="btn btn-primary"> Add User </a>
 <br><br>
 
 <table class="table">
@@ -37,7 +37,7 @@
 			}else{
 				echo "<td> -- </td>";
 			}
-			
+
 			if ($this->users[$i]['is_banned']==1) {
 				echo "<td>"."yes"."</td>";
 			}else{

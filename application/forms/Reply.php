@@ -5,66 +5,22 @@ class Application_Form_Reply extends Zend_Form
 
 	public function init()
     {
-        $this->model = new Application_Model_DbTable_ReplyModel();
-    }
+        /* Form Elements & Other Definitions Here ... */
 
-    public function indexAction()
-    {
 
-    }
+		$text = new Zend_Form_Element_Textarea("text");
+		$text->setRequired();
+		$text->setAttrib('rows', '9');
+		$text->setAttrib('cols', '10');
+		$text->setAttrib("placeholder","Enter your reply");
 
-    public function addAction()
-    {
-    	$data = $this->getRequest()->getParams();
-        $form = new Application_Form_Reply();
 
-        $this->view->form = $form;
-        if($this->getRequest()->isPost()){
-            if($form->isValid($data)){
-                if ($this->model->addReply($data))
-                    $this->redirect('replies');
-            }
-        }
-        $this->render('form');
-    }
 
-    public function editAction()
-    {
-        $id = $this->getRequest()->getParam('id');
-        $form = new Application_Form_Reply();
-        $reply = $this->model->getReplyById($id);
-		$reply_id = $reply[0]['reply_id'];
-        $form->populate($reply[0]);
-        $this->view->form = $form;
+		$submit = new Zend_Form_Element_Submit('submit');
+		$submit->setAttrib("class","btn btn-success");
 
-        if($this->getRequest()->isPost()){
-            $data = $this->getRequest()->getPost();
-            if($form->isValid($data)){
-                if ($this->model->editReply($data))
-                    $this->redirect('replies/show/id/'.$reply_id);
-            }
-        }
 
-        $this->render('form');
-    }
-
-    public function deleteAction()
-    {
-        $id = $this->getRequest()->getParam('id');
-        if($id){
-            if ($this->model->deleteReply($id))
-                $this->redirect('replies');
-
-        } else {
-            $this->redirect('replies');
-        }
-    }
-
-    public function replyRepliesAction()
-    {
-		$reply_id = $this->getRequest()->getParam('reply');
-        $this->view->replies = $this->model->listReplies($reply_id);
-
+		$this->addElements(array( $text, $submit));
     }
 
 
