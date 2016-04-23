@@ -21,11 +21,20 @@ class HomeController extends Zend_Controller_Action
     {
         // action body
         $this->view->threads = $this->ThreadModel->listThreads();
-        $this->view->categories=$this->CategoryModel->selectAllCategory();
-        $this->view->forums=$this->ForumsModel->selectAllForum();
-        $this->view->countForums=$this->ForumsModel->countCategoryForum(2);
+		$categories=$this->CategoryModel->selectAllCategory();
+
+		for ($i=0; $i < count($categories) ; $i++) {
+			$categories[$i]['forums'] = $this->ForumsModel->getCategoryForum($categories[$i]['id']);
+
+			for ($j=0; $j < count($categories[$i]['forums']) ; $j++) {
+				$categories[$i]['forums'][$j]['threads_count'] = count($this->ThreadModel->getForumThreads($categories[$i]['forums'][$j]['id']));
+			}
+		}
+
+
+		$this->view->categories = $categories;
+
     }
 
 
 }
-

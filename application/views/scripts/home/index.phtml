@@ -1,46 +1,46 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Home</b> and script/action name <b>index</b></p>
-</div>
+
 
 <?php
 //var_dump($this->threads);
 echo " <br> <br>" ;
-//var_dump($this->categories); 
+//var_dump($this->categories);
 echo " <br> <br>" ;
 //var_dump($this->forums);
 ?>
 
-<?php if($this->categories) { 
+<?php
 
-	if ($this->forums) {
-		
+
+	if($this->categories) {
+
 		for($i=0; $i<count($this->categories); $i++){
-		
-			echo"<div class='panel panel-default'>";
-		    echo "<div class='panel-heading'>  ".$this->categories[$i]['name']."</div>";
-		    echo "<div class='panel-body'>";
-		    echo "</div>";
 
-			echo "<table border=1 class='table table-striped'>" ;	
+			echo"<div class='panel panel-default'>";
+		    echo "<div class='panel-heading center'>  ".$this->categories[$i]['name']."</div>";
+		    echo "<div class='panel-body'>";
+
+
+			echo "<table class='table table-striped center'>" ;
 			echo "<thead>";
-			echo "<th>forum name</th>";
-			echo "<th>description</th>";
-			//echo "<th>no. of threads<th>";
+			echo "<th class='center'>forum name</th>";
+			echo "<th class='center'>Descreption</th>";
+			echo "<th class='center'>No. of Threads</th>";
 			echo "</thead>";
-			for ($i=0; $i <count($this->forums) ; $i++) { 
+			for ($j=0; $j < count($this->categories[$i]['forums']) ; $j++) {
 				echo "<tr>";
-				echo "<td>".$this->forums[$i]['name'] ."</td>";
-				echo "<td>".$this->forums[$i]['descreption'] ."</td>";
-				echo $this->countForums; 
-				//echo "<td>ai aga</td>";
+				echo "<td>". $this->categories[$i]['forums'][$j]['name'] ."</td>";
+				echo "<td>". $this->categories[$i]['forums'][$j]['descreption'] ."</td>";
+				echo "<td>". $this->categories[$i]['forums'][$j]['threads_count'] ."</td>";
 				echo"</tr>";
 			}
 			echo "</table>";
 
 			echo "</div>";
 
+
+			echo "</div>";
 			echo "<br>";
 		}
-	}			
-}
+
+	}
