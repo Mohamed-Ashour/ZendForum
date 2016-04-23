@@ -2,3 +2,45 @@
 <div id="view-content">
 	<p>View script for controller <b>Home</b> and script/action name <b>index</b></p>
 </div>
+
+<?php
+//var_dump($this->threads);
+echo " <br> <br>" ;
+//var_dump($this->categories); 
+echo " <br> <br>" ;
+//var_dump($this->forums);
+?>
+
+<?php if($this->categories) { 
+
+	if ($this->forums) {
+		
+		for($i=0; $i<count($this->categories); $i++){
+		
+			echo"<div class='panel panel-default'>";
+		    echo "<div class='panel-heading'>  ".$this->categories[$i]['name']."</div>";
+		    echo "<div class='panel-body'>";
+		    echo "</div>";
+
+			echo "<table border=1 class='table table-striped'>" ;	
+			echo "<thead>";
+			echo "<th>forum name</th>";
+			echo "<th>description</th>";
+			//echo "<th>no. of threads<th>";
+			echo "</thead>";
+			for ($i=0; $i <count($this->forums) ; $i++) { 
+				echo "<tr>";
+				echo "<td>".$this->forums[$i]['name'] ."</td>";
+				echo "<td>".$this->forums[$i]['descreption'] ."</td>";
+				echo $this->countForums; 
+				//echo "<td>ai aga</td>";
+				echo"</tr>";
+			}
+			echo "</table>";
+
+			echo "</div>";
+
+			echo "<br>";
+		}
+	}			
+}

@@ -33,18 +33,25 @@
 				echo "<tr>";
 				echo "<td>".$this->threads[$i]['id']."</td>";
 				echo "<td>".$this->threads[$i]['title']."</td>";
-				echo "<td>".$this->threads[$i]['body']."</td>";
+				
+				if ( strlen($this->threads[$i]['body']) > 40) {
+				echo "<td>". substr($this->threads[$i]['body'],0, 40 ) ." .... </td>";
+				}else{ 
+					echo "<td>". $this->threads[$i]['body'] ."</td>"; 
+				}
+				
+				//echo "<td>".$this->threads[$i]['body']."</td>";
 				echo "<td>".$this->threads[$i]['date']."</td>";
 				if ($this->threads[$i]['is_sticky'] == 1) {
 					# code...
 					echo "<td>"."sticky"."</td>";
 				}else{
-					echo "<td>"."closed"."</td>";
+					echo "<td>"."--"."</td>";
 				}
 
 				if ($this->threads[$i]['is_opened'] == 1) {
 					# code...
-					echo "<td>"."opened"."</td>";
+					echo "<td>"."--"."</td>";
 				}else{
 					echo "<td>"."closed"."</td>";
 				}
