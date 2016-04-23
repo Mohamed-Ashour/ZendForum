@@ -10,9 +10,9 @@ class Application_Model_DbTable_ReplyModel extends Zend_Db_Table_Abstract
     	return $this->fetchAll()->toArray();
     }
 
-	function listThreadReplies($post_id)
+	function listThreadReplies($thread_id)
     {
-    	return $this->fetchAll("post_id = $post_id")->toArray();
+    	return $this->fetchAll("thread_id = $thread_id")->toArray();
     }
 
 

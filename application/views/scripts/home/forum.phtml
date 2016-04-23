@@ -1,4 +1,47 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Home</b> and script/action name <b>forum</b></p>
-</div>
+
+
+<?php
+//var_dump($this->threads);
+echo " <br> <br>" ;
+//var_dump($this->categories);
+echo " <br> <br>" ;
+//var_dump($this->forums);
+?>
+
+<?php
+
+
+	if($this->forums) {
+
+
+			echo"<div class='panel panel-default'>";
+		    echo "<div class='panel-heading center'>  ".$this->forums['name']."</div>";
+		    echo "<div class='panel-body'>";
+
+
+			echo "<table class='table table-striped center'>" ;
+			echo "<thead>";
+			echo "<th class='center'>thread name</th>";
+			echo "<th class='center'>Date</th>";
+			echo "<th class='center'>UserName</th>";
+			echo "<th class='center'>No. of Replies</th>";
+			echo "</thead>";
+			for ($j=0; $j < count($this->forums['threads']) ; $j++) {
+				echo "<tr>";
+				echo "<td>". $this->forums['threads'][$j]['title'] ."</td>";
+				echo "<td>". $this->forums['threads'][$j]['date'] ."</td>";
+				echo "<td>". $this->forums['threads'][$j]['username'] ."</td>";
+				echo "<td>". $this->forums['threads'][$j]['replys_count'] ."</td>";
+				echo"</tr>";
+			}
+			echo "</table>";
+
+			echo "</div>";
+
+
+			echo "</div>";
+			echo "<br>";
+		
+
+	}

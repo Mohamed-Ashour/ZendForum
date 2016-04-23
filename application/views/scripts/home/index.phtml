@@ -29,7 +29,8 @@ echo " <br> <br>" ;
 			echo "</thead>";
 			for ($j=0; $j < count($this->categories[$i]['forums']) ; $j++) {
 				echo "<tr>";
-				echo "<td>". $this->categories[$i]['forums'][$j]['name'] ."</td>";
+				echo "<td><a href='".$this->baseUrl()."/index.php/home/forum/id/".$this->categories[$i]['forums'][$j]['id']."'>". $this->categories[$i]['forums'][$j]['name'] ."</a></td>";
+
 				echo "<td>". $this->categories[$i]['forums'][$j]['descreption'] ."</td>";
 				echo "<td>". $this->categories[$i]['forums'][$j]['threads_count'] ."</td>";
 				echo"</tr>";
