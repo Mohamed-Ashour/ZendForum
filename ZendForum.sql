@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2016 at 01:09 AM
+-- Generation Time: Apr 24, 2016 at 04:22 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -30,7 +30,15 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(2, 'my category 1'),
+(3, 'women');
 
 -- --------------------------------------------------------
 
@@ -46,7 +54,16 @@ CREATE TABLE IF NOT EXISTS `forum` (
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`id`, `name`, `descreption`, `is_opened`, `category_id`) VALUES
+(1, 'egypt', 'egypt sucks', 1, 2),
+(2, 'forum x', 'fnjkfkjhkhfjkhf', 1, 3),
+(3, ',mdnjkn', 'kljdlkjldkjl', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -72,8 +89,17 @@ CREATE TABLE IF NOT EXISTS `reply` (
 --
 
 CREATE TABLE IF NOT EXISTS `system` (
-  `is_opened` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_opened` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `system`
+--
+
+INSERT INTO `system` (`id`, `is_opened`) VALUES
+(1, 0);
 
 -- --------------------------------------------------------
 
@@ -95,7 +121,17 @@ CREATE TABLE IF NOT EXISTS `thread` (
   KEY `forum_id` (`forum_id`,`user_id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `thread`
+--
+
+INSERT INTO `thread` (`id`, `title`, `body`, `date`, `is_sticky`, `is_opened`, `forum_id`, `user_id`, `category_id`) VALUES
+(2, 'kdlkdmlkm', 'kmdlkmdklssssssssssssssss', '2016-04-22 20:04:14', 0, 0, 1, 1, 2),
+(3, 'threadX', 'aaaaaaaaaaaa', '2016-04-24 12:52:17', 0, 1, 2, 7, 2),
+(4, 'fjfij', 'jdjildjio', '2016-04-24 13:17:49', 0, 1, 2, 7, 2),
+(5, 'kfjlfj', 'klfkljkl', '2016-04-24 13:18:07', 0, 1, 2, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -108,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `image` varchar(50) NOT NULL DEFAULT 'uploads/default.jpg',
+  `image` varchar(50) NOT NULL DEFAULT 'uploads/images/default.png',
   `country` varchar(50) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `signature` varchar(200) NOT NULL,
@@ -116,7 +152,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_banned` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `image`, `country`, `gender`, `signature`, `is_admin`, `is_banned`) VALUES
+(1, 'ashourX', 'ashour@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'uploads/images/default.png', 'Egypt', 'Male', 'signature', 0, 0),
+(3, 'ashour', 'root@iti.com', 'b091c1c608af5a7a1bceba079ff17490', 'uploads/images/default.png', 'Egypt', 'Male', 'dkjljdl', 0, 0),
+(4, 'ashourr', 'any@kjkjf.co', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/images/default.png', 'Egypt', 'Female', 'djhukjdnkndkndl', 0, 0),
+(7, 'admin', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 'uploads/images/pin.jpg', 'Egypt', 'Male', 'sign', 1, 0),
+(8, 'ahmed', 'ahmed@ahmed.com', '9193ce3b31332b03f7d8af056c692b84', 'uploads/images/smile.jpg', 'Egypt', 'Male', 'sign', 0, 0);
 
 --
 -- Constraints for dumped tables
@@ -139,9 +186,9 @@ ALTER TABLE `reply`
 -- Constraints for table `thread`
 --
 ALTER TABLE `thread`
-  ADD CONSTRAINT `thread_ibfk_3` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `thread_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `thread_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `thread_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `thread_ibfk_3` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
