@@ -24,6 +24,7 @@ class HomeController extends Zend_Controller_Action
         $this->UserModel = new Application_Model_DbTable_UserModel();
         $this->ReplyModel = new Application_Model_DbTable_ReplyModel();
 		$this->userModel = new Application_Model_DbTable_UserModel();
+		$this->SystemModel = new Application_Model_DbTable_SystemModel();
 		$this->identity = Zend_Auth::getInstance()->getIdentity();
 		if (isset($this->identity)) {
 			$this->view->identity = $this->identity;
@@ -33,6 +34,18 @@ class HomeController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+		if (isset($this->identity)) {
+			if (!$this->SystemModel->getState() && !$this->identity->is_admin) {
+				echo "<div class='panel-danger'>System is off now</div>";
+				return;
+			}
+			elseif ($this->identity->is_banned) {
+				echo "<p>you are banned</p>";
+				return;
+			}
+
+		}
+		$this->view->system = 1;
         $this->view->threads = $this->ThreadModel->listThreads();
 		$categories=$this->CategoryModel->selectAllCategory();
 
@@ -98,7 +111,10 @@ class HomeController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
         $storage->read();
-        $userId=$storage->read()->id;
+		if (isset($storage->read()->id)) {
+			$userId=$storage->read()->id;
+		}
+
 
 
         $this->view->form = $formReply;

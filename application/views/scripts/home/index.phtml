@@ -1,10 +1,15 @@
-<br /><br />
+<br />
 
 <h1>3adeella Forums<small> </small></h1>
 <br>
-<?php if (isset($this->identity)): ?>
+<?php if (isset($this->identity) && !$this->identity->is_banned && isset($this->system) && !$this->identity->is_admin): ?>
 	<a href="<?php echo $this->baseUrl('index.php/threads/add') ?>" class="btn btn-primary">Add Thread</a>
 <?php endif; ?>
+<?php if (isset($this->identity) && $this->identity->is_admin ): ?>
+	<a href="<?php echo $this->baseUrl('index.php/threads/add') ?>" class="btn btn-primary">Add Thread</a>
+<?php endif; ?>
+
+
 
 <br><br>
 
