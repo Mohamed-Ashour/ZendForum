@@ -4,28 +4,58 @@ class UsersController extends Zend_Controller_Action
 {
 
     private $userModel = null;
-
+	private $identity = null;
     public function init()
     {
         $this->userModel = new Application_Model_DbTable_UserModel();
+		$this->identity = Zend_Auth::getInstance()->getIdentity();
     }
 
     public function indexAction()
     {
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin == '1') {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
+
 		$this->view->title = 'Users';
         $this->view->users = $this->userModel->listUsers();
-		$identity = Zend_Auth::getInstance()->getIdentity();
-		var_dump($identity);
+
     }
 
     public function addAction()
     {
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin == '1') {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
+
     	$data = $this->getRequest()->getParams();
         $form = new Application_Form_Registeration();
         $form->email->addValidator(new Zend_Validate_Db_NoRecordExists(
             array(
               'table' => 'user',
               'field' => 'email'
+            )
+        ));
+        $form->username->addValidator(new Zend_Validate_Db_NoRecordExists(
+            array(
+              'table' => 'user',
+              'field' => 'username'
             )
         ));
 
@@ -49,6 +79,18 @@ class UsersController extends Zend_Controller_Action
 
     public function editAction()
     {
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin == '1') {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
+
         $id = $this->getRequest()->getParam('id');
         $form = new Application_Form_Registeration();
 
@@ -57,11 +99,18 @@ class UsersController extends Zend_Controller_Action
         $this->view->form = $form;
 
         if($this->getRequest()->isPost()){
-            $data = $this->getRequest()->getPost();
-            if($form->isValid($data)){
-                if ($this->userModel->editUser($data))
-                    $this->redirect('users');
-            }
+			$data = $this->getRequest()->getPost();
+
+			if($form->getElement('image')->receive())
+			{
+				$data['image'] = 'uploads/images/' . $form->getElement('image')->getValue();
+
+				if($form->isValid($data)){
+					if ($this->userModel->editUser($data, $id))
+					$this->redirect('users');
+				}
+			}
+
         }
 		$this->view->title = 'Edit User';
         $this->render('form');
@@ -69,6 +118,18 @@ class UsersController extends Zend_Controller_Action
 
     public function deleteAction()
     {
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin) {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
+
         $id = $this->getRequest()->getParam('id');
         if($id){
             if ($this->userModel->deleteUser($id))
@@ -107,7 +168,7 @@ class UsersController extends Zend_Controller_Action
                 $auth = Zend_Auth::getInstance();
                 $storage = $auth->getStorage();
                 $storage->write($authAdapter->getResultRowObject(array('id' , 'email' , 'username' , 'password','image','country','gender','signature','is_admin','is_banned')));
-                $this->redirect('index');
+                $this->redirect('home');
 
             }else{
                 echo "user doesnt exist !!" ;

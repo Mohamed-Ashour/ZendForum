@@ -3,12 +3,24 @@
 class CategoriesController extends Zend_Controller_Action
 {
     public static $CateModel = null;
+	private $identity = null;
 
 
     public function init()
     {
-         $this->CateModel = new Application_Model_DbTable_CategoryModel();
-
+        $this->CateModel = new Application_Model_DbTable_CategoryModel();
+		$this->identity = Zend_Auth::getInstance()->getIdentity();
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin == '1') {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
     }
 
     public function indexAction()
@@ -52,7 +64,7 @@ class CategoriesController extends Zend_Controller_Action
             $this->redirect("categories/index");
         } else {
             $Category_id = $this->_request->getParam("id");
-            
+
             $this->view->Category_info = CategoriesController::$CateModel->selectCategoryById($Category_id);
         }*/
 
@@ -96,9 +108,3 @@ class CategoriesController extends Zend_Controller_Action
         $this->redirect("categories/index"); */
 
 }
-
-
-
-
-
-
