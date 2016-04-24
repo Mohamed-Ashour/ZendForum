@@ -13,7 +13,7 @@ class HomeController extends Zend_Controller_Action
 
     public static $ReplyModel = null;
 
-	private $identity = null;
+    private $identity = null;
 
     public function init()
     {
@@ -51,7 +51,7 @@ class HomeController extends Zend_Controller_Action
 
     public function forumAction()
     {
-        $this->view->threads = $this->ThreadModel->listThreads();
+        //$this->view->threads = $this->ThreadModel->listThreads();
 
 		$forumId = $this->getRequest()->getParam('id');
 		$forums=$this->ForumsModel->selectForumById($forumId)[0];
@@ -66,11 +66,15 @@ class HomeController extends Zend_Controller_Action
     	    $forums['threads'][$j]['username'] = $name;
    		}
 
-
-
+        
+        
+        $stickyThreads=$this->ThreadModel->listStickyThreads();
+        $nonStickyThreads=$this->ThreadModel->listNonStickyThreads();
+        //echo var_dump($stickyThreads);
+        //echo var_dump($nonStickyThreads);
 
 		$this->view->forums = $forums;
-
+        $this->view->stickyThreads = $stickyThreads;
     }
 
     public function threadAction()
@@ -112,5 +116,52 @@ class HomeController extends Zend_Controller_Action
 
     }
 
+    public function deleteAction()
+    {
+        // action body
+        $id = $this->getRequest()->getParam('id');
+        echo "reply id el mafrood" . $id ;
+        if($id){
+            $threadId = $this->ReplyModel->getThreadIdFromReply($id);
+         if ($this->ReplyModel->deleteReply($id))
+            
+            $this->redirect('home/thread/id/'.$threadId[0]['thread_id']);
+                            
+            
+        } else {
+            //$this->redirect("blog-x/details/id/".$postId['post_id']);
+            $this->redirect('home/thread/id/'.$threadId['thread_id']);
+        }
+    }
+
+    public function editAction()
+    {
+        // action body
+        $replyId = $this->getRequest()->getParam('id');
+        $threadId = $this->ReplyModel->getThreadIdFromReply($replyId);
+        
+        $form = new Application_Form_Reply();
+        
+        $reply = $this->ReplyModel->getReplyById($threadId);
+        $form->populate($reply[0]);
+        print_r($reply[0]);
+        //$form->setAction("users/index");
+        $this->view->form = $form;
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getParams();
+            if($form->isValid($data)){
+                if ($this->ReplyModel->editReply($threadId , $data))
+                    $this->redirect('home/thread/id/'.$threadId['thread_id']);
+            }   
+        }   
+        
+        $this->render('form');
+    }
+
 
 }
+
+
+
+

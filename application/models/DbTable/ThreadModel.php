@@ -26,6 +26,20 @@ class Application_Model_DbTable_ThreadModel extends Zend_Db_Table_Abstract
 		return $this->fetchAll()->toArray();
 	}
 
+	function listStickyThreads(){
+		$select = $this->select()->where('is_sticky=1');
+		return $this->fetchAll($select)->toArray();
+	}
+
+	
+	function listNonStickyThreads(){
+		$select = $this->select()->where('is_sticky=0');
+		return $this->fetchAll($select)->toArray();
+	}
+
+	// public function getForumThreads($forum_id) {
+ //       return $this->fetchAll("forum_id=$forum_id")->toArray();
+ //    }
 
 	function deleteThread($id){
 		return $this->delete('id='.$id);
