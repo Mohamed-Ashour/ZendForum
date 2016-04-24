@@ -34,7 +34,7 @@ class Application_Model_DbTable_UserModel extends Zend_Db_Table_Abstract
     function editUser($data, $id)
     {
     	
-      $id = $data['id'];
+      
     	if (isset($data['module']))
 			  unset( $data['module']) ;
   		if (isset($data['controller']))
@@ -43,6 +43,8 @@ class Application_Model_DbTable_UserModel extends Zend_Db_Table_Abstract
   		 	unset( $data['action']);
   		if (isset($data['submit']))
   		 	unset( $data['submit']);
+      if (isset($data['MAX_FILE_SIZE']))
+        unset( $data['MAX_FILE_SIZE']);
 
 
 		  $data['password']=md5($data['password']);

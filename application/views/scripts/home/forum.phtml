@@ -29,7 +29,9 @@ echo " <br> <br>" ;
 			echo "</thead>";
 			for ($j=0; $j < count($this->forums['threads']) ; $j++) {
 				echo "<tr>";
-				echo "<td>". $this->forums['threads'][$j]['title'] ."</td>";
+				//echo "<td>". $this->forums['threads'][$j]['title'] ."</td>";
+				echo "<td><a href='".$this->baseUrl()."/index.php/home/thread/id/".$this->forums['threads'][$j]['id']."'>". $this->forums['threads'][$j]['title'] ."</a></td>";
+
 				echo "<td>". $this->forums['threads'][$j]['date'] ."</td>";
 				echo "<td>". $this->forums['threads'][$j]['username'] ."</td>";
 				echo "<td>". $this->forums['threads'][$j]['replys_count'] ."</td>";

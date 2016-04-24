@@ -13,7 +13,6 @@ class HomeController extends Zend_Controller_Action
 
     public static $ReplyModel = null;
 
-
     public function init()
     {
         /* Initialize action controller here */
@@ -67,7 +66,22 @@ class HomeController extends Zend_Controller_Action
 
     }
 
+    public function threadAction()
+    {
+        // action body
+        $threadId = $this->getRequest()->getParam('id');
+        $thread=$this->ThreadModel->getThreadById($threadId)/*[0]*/;
+        $userId=$thread[0]['user_id'];
+        $name = $this->UserModel->getUserById($userId);
+        $this->view->username=$name[0]['username'];
+        $this->view->thread=$thread;
+        //var_dump($thread);
+
+    }
+
 
 }
+
+
 
 

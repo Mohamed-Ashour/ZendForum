@@ -1,0 +1,44 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>Home</b> and script/action name <b>thread</b></p>
+</div>
+
+
+<?php if($this->thread) { 
+
+	//var_dump($this->thread);
+
+	echo " <div class='row'>";
+	echo "<div class= 'col-lg-8'>";		
+
+		for($i=0; $i<count($this->thread); $i++){
+
+			echo"<div class='panel panel-default'>";
+		    echo "<div class='panel-heading'> thread no. ".$this->thread[$i]['id']."<p style='float:right'>".$this->thread[$i]['date']."<p>"."</div>";
+		    
+		    /*
+		    echo "<div class='panel-body'>";
+		    
+		    echo "</div>";
+			*/
+
+			echo "<table border=0 class='table table-striped ' >" ;	
+			echo '<tr><td>user id : '.$this->thread[$i]['user_id'].'</td></tr>';
+			echo '<tr><td>username : '.$this->username.'</td></tr>';
+			echo '<tr><td>title: '.$this->thread[$i]['title'].'</td></tr>';
+			echo '<tr><td>body: '.$this->thread[$i]['body'].'</td></tr>';
+			 echo '<tr><td><a href="'.$this->baseUrl().'/index.php/threads/edit/id/'.$this->thread[$i]['id'].'"><button class="btn btn-primary"> Edit </button></a></td></tr>';
+			
+			echo "</tr>";
+			echo "</table>";
+			
+		}
+		
+	echo "</div>";
+	echo "</div>";	
+	echo "</div>";
+	echo "</div>";
+	//echo "</div>";
+		
+	}
+	

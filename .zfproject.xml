@@ -14,6 +14,7 @@
         <controllerFile controllerName="Home">
           <actionMethod actionName="index"/>
           <actionMethod actionName="forum"/>
+          <actionMethod actionName="thread"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -34,6 +35,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Home">
             <viewScriptFile forActionName="forum"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Home">
+            <viewScriptFile forActionName="thread"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

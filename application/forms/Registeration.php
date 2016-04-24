@@ -13,16 +13,12 @@ class Application_Form_Registeration extends Zend_Form
 		$username->setlabel("Username:");
 		$username->setAttrib("class","form-control");
 		$username->setAttrib("placeholder","Enter your username");
+		
 
 		$email = new Zend_Form_Element_Text("email");
 		$email->setRequired();
 		$email->addValidator(new Zend_Validate_EmailAddress());
-		$email->addValidator(new Zend_Validate_Db_NoRecordExists(
-		    array(
-			  'table' => 'user',
-			  'field' => 'email'
-		    )
-		));
+		
 		$email->setlabel("Email:");
 		$email->setAttrib("placeholder","Enter your Email");
 		$email->setAttrib("class","form-control");
