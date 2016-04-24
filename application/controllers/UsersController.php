@@ -36,9 +36,14 @@ class UsersController extends Zend_Controller_Action
     public function addAction()
     {
 
-
     	$data = $this->getRequest()->getParams();
         $form = new Application_Form_Registeration();
+
+		if (!isset($this->identity) || !$this->identity->is_admin) {
+			$form->removeElement('is_admin');
+			$form->removeElement('is_banned');
+		}
+
         $form->email->addValidator(new Zend_Validate_Db_NoRecordExists(
             array(
               'table' => 'user',
@@ -51,8 +56,6 @@ class UsersController extends Zend_Controller_Action
               'field' => 'username'
             )
         ));
-
-
 
         $this->view->form = $form;
         if($this->getRequest()->isPost()){
@@ -73,9 +76,14 @@ class UsersController extends Zend_Controller_Action
     public function editAction()
     {
 
-
         $id = $this->getRequest()->getParam('id');
         $form = new Application_Form_Registeration();
+
+		if (!isset($this->identity) || !$this->identity->is_admin) {
+			$form->removeElement('is_admin');
+			$form->removeElement('is_banned');
+		}
+
 
         $user = $this->userModel->getUserById($id);
         $form->populate($user[0]);

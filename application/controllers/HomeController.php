@@ -13,6 +13,8 @@ class HomeController extends Zend_Controller_Action
 
     public static $ReplyModel = null;
 
+	private $identity = null;
+
     public function init()
     {
         /* Initialize action controller here */
@@ -21,6 +23,11 @@ class HomeController extends Zend_Controller_Action
         $this->CategoryModel = new Application_Model_DbTable_CategoryModel();
         $this->UserModel = new Application_Model_DbTable_UserModel();
         $this->ReplyModel = new Application_Model_DbTable_ReplyModel();
+		$this->userModel = new Application_Model_DbTable_UserModel();
+		$this->identity = Zend_Auth::getInstance()->getIdentity();
+		if (isset($this->identity)) {
+			$this->view->identity = $this->identity;
+		}
     }
 
     public function indexAction()
@@ -45,22 +52,22 @@ class HomeController extends Zend_Controller_Action
     public function forumAction()
     {
         $this->view->threads = $this->ThreadModel->listThreads();
-	
+
 		$forumId = $this->getRequest()->getParam('id');
 		$forums=$this->ForumsModel->selectForumById($forumId)[0];
- 	
+
 		$forums['threads'] = $this->ThreadModel->getForumThreads($forums['id']);
-       
+
 		for ($j=0; $j < count($forums['threads']) ; $j++) {
 			$forums['threads'][$j]['replys_count'] = count($this->ReplyModel->listThreadReplies($forums['threads'][$j]['id']));
 		}
-        for ($j=0; $j < count($forums['threads']); $j++) { 
+        for ($j=0; $j < count($forums['threads']); $j++) {
         	$name = $this->UserModel->getUserById($forums['threads'][$j]['user_id'])[0]['username'];
     	    $forums['threads'][$j]['username'] = $name;
-   		}	
+   		}
 
 
-	
+
 
 		$this->view->forums = $forums;
 
@@ -78,7 +85,7 @@ class HomeController extends Zend_Controller_Action
         //var_dump($thread);
 
         /* *************************************************** */
-        
+
         $data = $this->getRequest()->getParams();
         $formReply = new Application_Form_Reply();
 
@@ -88,7 +95,7 @@ class HomeController extends Zend_Controller_Action
         $storage = $auth->getStorage();
         $storage->read();
         $userId=$storage->read()->id;
-        
+
 
         $this->view->form = $formReply;
 
@@ -98,16 +105,12 @@ class HomeController extends Zend_Controller_Action
                     $this->redirect('home/thread/id/'.$threadId);
             }
         }
-        //$this->render('form');        
+        //$this->render('form');
         //$commentsX = $this->modelComment->listComments($id);
         $this->view->replies = $this->ReplyModel->listThreadReplies($threadId);
-        
-        
+
+
     }
 
 
 }
-
-
-
-
