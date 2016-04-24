@@ -64,7 +64,7 @@ class HomeController extends Zend_Controller_Action
 
     public function forumAction()
     {
-        //$this->view->threads = $this->ThreadModel->listThreads();
+        $this->view->threads = $this->ThreadModel->listThreads();
 
 		$forumId = $this->getRequest()->getParam('id');
 		$forums=$this->ForumsModel->selectForumById($forumId)[0];
@@ -87,7 +87,7 @@ class HomeController extends Zend_Controller_Action
         //echo var_dump($nonStickyThreads);
 
 		$this->view->forums = $forums;
-        $this->view->stickyThreads = $stickyThreads;
+        //$this->view->stickyThreads = $stickyThreads;
     }
 
     public function threadAction()
