@@ -13,7 +13,7 @@ class HomeController extends Zend_Controller_Action
 
     public static $ReplyModel = null;
 
-	private $identity = null;
+    private $identity = null;
 
     public function init()
     {
@@ -127,6 +127,13 @@ class HomeController extends Zend_Controller_Action
 
 
     }
+
+	public function uthreadsAction()
+	{
+		$user_id = $this->getRequest()->getParam('id');
+		$this->view->threads = $this->ThreadModel->getUserThreads($user_id);
+
+	}
 
 
 }

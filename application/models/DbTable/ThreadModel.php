@@ -60,4 +60,9 @@ class Application_Model_DbTable_ThreadModel extends Zend_Db_Table_Abstract
        return $this->fetchAll("forum_id=$forum_id")->toArray();
     }
 
+	public function getUserThreads($user_id) {
+       return $this->fetchAll("user_id=$user_id")->toArray();
+    }
+
+
 }

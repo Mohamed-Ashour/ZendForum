@@ -15,6 +15,7 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="forum"/>
           <actionMethod actionName="thread"/>
+          <actionMethod actionName="uthreads"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -38,6 +39,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Home">
             <viewScriptFile forActionName="thread"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Home">
+            <viewScriptFile forActionName="uthreads"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
