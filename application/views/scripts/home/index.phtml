@@ -2,8 +2,9 @@
 
 <h1>3adeella Forums<small> </small></h1>
 <br>
-
-<a href="<?php echo $this->baseUrl('index.php/threads/add') ?>" class="btn btn-primary">Add Thread</a>
+<?php if (isset($this->identity)): ?>
+	<a href="<?php echo $this->baseUrl('index.php/threads/add') ?>" class="btn btn-primary">Add Thread</a>
+<?php endif; ?>
 
 <br><br>
 

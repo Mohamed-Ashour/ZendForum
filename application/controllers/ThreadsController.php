@@ -25,6 +25,7 @@ class ThreadsController extends Zend_Controller_Action
 	public function userThreads()
     {
         $id = $this->getRequest()->getParam('id');
+		$threads = $this->model->getForumThreads($id);
     }
 
 
@@ -72,9 +73,18 @@ class ThreadsController extends Zend_Controller_Action
 
     public function addAction()
     {
-
         $data = $this->getRequest()->getParams();
         $form = new Application_Form_Thread();
+
+		if (isset($this->identity)) {
+			if (!$this->identity->is_admin) {
+				$form->removeElement('is_sticky');
+				$form->removeElement('is_open');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
 
         $categories = $this->CategoryModel->selectAllCategory();
 
@@ -118,6 +128,16 @@ class ThreadsController extends Zend_Controller_Action
         $id = $this->getRequest()->getParam('id');
 
         $form = new Application_Form_Thread();
+
+		if (isset($this->identity)) {
+			if (!$this->identity->is_admin) {
+				$form->removeElement('is_sticky');
+				$form->removeElement('is_open');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
 
         $categories = $this->CategoryModel->selectAllCategory();
 
