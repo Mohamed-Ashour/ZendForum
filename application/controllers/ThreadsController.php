@@ -105,14 +105,21 @@ class ThreadsController extends Zend_Controller_Action
         $storage = $auth->getStorage();
         $storage->read();
         $userId=$storage->read()->id;
-        echo "this is the logged user idees ".$userId;
+        // echo "this is the logged user idees ".$userId;
         $this->view->id=$userId;
 
         if($this->getRequest()->isPost()){
 
             if($form->isValid($data)){
-            if ($this->model->addThread($userId,$data))
-            $this->redirect('threads/index');
+				$forum = $this->ForumsModel->selectForumById($data['forum_id'])[0];
+
+				if ($forum['is_opened']) {
+					if ($this->model->addThread($userId,$data))
+					$this->redirect('threads/index');
+				}
+				else {
+					echo '<h3>forum is closed</h3>';
+				}
             }
         }
 

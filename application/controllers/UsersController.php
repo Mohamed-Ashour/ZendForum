@@ -65,6 +65,13 @@ class UsersController extends Zend_Controller_Action
             if($form->isValid($data)){
                 if($form->getElement('image')->receive())
                 {
+					$message = "this is your registeratio info\n username = ".$data['username']."\n your password is ". $data['username'];
+					$mail = new Zend_Mail();
+					$mail->setBodyText($message);
+					$mail->setFrom('admin@3adellaa.com');
+					$mail->addTo($data['email']);
+					$mail->setSubject('Registeration message');
+					$mail->send();
                     $data['image'] = 'uploads/images/' . $form->getElement('image')->getValue();
 
                     if ($this->userModel->addUser($data))
@@ -156,19 +163,18 @@ class UsersController extends Zend_Controller_Action
             $authAdapter->setCredential(md5($password));
             $result = $authAdapter->authenticate();
 
-			// if (!$this->SystemModel->getState()) {
-			// 	echo "<p class='danger'>System is off now</p>";
-			// 	return;
-			// }
+
 
 
 
             if ($result->isValid()) {
                 //if the user is valid register his info in session
                 $auth = Zend_Auth::getInstance();
-                $storage = $auth->getStorage();
+				$storage = $auth->getStorage();
                 $storage->write($authAdapter->getResultRowObject(array('id' , 'email' , 'username' , 'password','image','country','gender','signature','is_admin','is_banned')));
-                $this->redirect('home');
+
+
+				$this->redirect('home');
 
             }else{
                 echo "<p>user doesnt exist !!</p>" ;
