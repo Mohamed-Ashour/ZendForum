@@ -36,9 +36,10 @@ class Application_Model_DbTable_ReplyModel extends Zend_Db_Table_Abstract
     }
 
 
-    function editReply($data)
+    function editReply($id,$data)
     {
-    	$id = $data['id'];
+    	
+      $id = $data['id'];
     	if (isset($data['module']))
 			unset( $data['module']) ;
 		if (isset($data['controller']))
@@ -65,6 +66,9 @@ class Application_Model_DbTable_ReplyModel extends Zend_Db_Table_Abstract
     	return $this->find($id)->toArray();
     }
 
+    function getThreadIdFromReply($id){
+    return  $this->find($id)->toArray();
+    }
 
 
 }

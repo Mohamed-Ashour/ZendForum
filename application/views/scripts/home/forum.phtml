@@ -12,7 +12,7 @@ echo " <br> <br>" ;
 <?php
 
 
-	if($this->forums) {
+	if($this->stickyThreads) {
 
 
 			echo"<div class='panel panel-default'>";
@@ -26,6 +26,7 @@ echo " <br> <br>" ;
 			echo "<th class='center'>Date</th>";
 			echo "<th class='center'>UserName</th>";
 			echo "<th class='center'>No. of Replies</th>";
+			echo "<th class='center'>is sticky </th>";
 			echo "</thead>";
 			for ($j=0; $j < count($this->forums['threads']) ; $j++) {
 				echo "<tr>";
@@ -35,6 +36,14 @@ echo " <br> <br>" ;
 				echo "<td>". $this->forums['threads'][$j]['date'] ."</td>";
 				echo "<td>". $this->forums['threads'][$j]['username'] ."</td>";
 				echo "<td>". $this->forums['threads'][$j]['replys_count'] ."</td>";
+				if ($this->forums['threads'][$j]['is_sticky'] == 1) {
+					# code...
+					echo "<td style='background-color:#819FF7'>". "sticky" ."</td>";
+				}else{
+					echo "<td >". /*$this->forums['threads'][$j]['is_sticky']*/ "mesh sticky" ."</td>";
+				}
+				
+
 				echo"</tr>";
 			}
 			echo "</table>";
