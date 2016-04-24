@@ -2,38 +2,67 @@
 
 class RepliesController extends Zend_Controller_Action
 {
-
+	private $identity = null;
+	private $model;
     public function init()
     {
-        /* Initialize action controller here */
+        $this->identity = Zend_Auth::getInstance()->getIdentity();
+		$this->model = new Application_Model_DbTable_ReplyModel();
     }
 
-    public function indexAction()
+	public function addAction()
     {
-        // action body
-    }
+    	$data = $this->getRequest()->getParams();
+        $form = new Application_Form_Reply();
 
-    public function addAction()
-    {
-        // action body
+        $this->view->form = $form;
+        if($this->getRequest()->isPost()){
+            if($form->isValid($data)){
+                if ($this->model->addReply($data))
+                    $this->redirect('replies');
+            }
+        }
+        $this->render('form');
     }
 
     public function editAction()
     {
-        // action body
+        $id = $this->getRequest()->getParam('id');
+        $form = new Application_Form_Reply();
+        $reply = $this->model->getReplyById($id);
+		$post_id = $reply[0]['post_id'];
+        $form->populate($reply[0]);
+        $this->view->form = $form;
+
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost();
+            if($form->isValid($data)){
+                if ($this->model->editReply($data))
+                    $this->redirect('posts/show/id/'.$post_id);
+            }
+        }
+
+        $this->render('form');
     }
 
     public function deleteAction()
     {
-        // action body
+        $id = $this->getRequest()->getParam('id');
+        if($id){
+            if ($this->model->deleteReply($id))
+                $this->redirect('replies');
+
+        } else {
+            $this->redirect('replies');
+        }
+    }
+
+    public function postRepliesAction()
+    {
+		$post_id = $this->getRequest()->getParam('post');
+        $this->view->replies = $this->model->listReplies($post_id);
+
     }
 
 
 }
-
-
-
-
-
-
-

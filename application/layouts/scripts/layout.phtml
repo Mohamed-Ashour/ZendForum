@@ -9,7 +9,21 @@
 		<script src='<?php echo $this->baseUrl("/static/js/script.js")?>'></script>
 	</head>
 	<body>
-		<?php echo $this->partial('_adminHeader.phtml'); ?>
+		<?php
+		
+		if (!isset($this->identity)) {
+			echo $this->partial('_visitorHeader.phtml');
+		}
+		elseif ($this->identity->is_admin) {
+			echo $this->partial('_adminHeader.phtml');
+		}
+		else {
+			echo $this->partial('_userHeader.phtml');
+		}
+
+		?>
+
+
 		<div class="container">
 		<?php echo $this->layout()->content; ?>
 		</div>

@@ -7,6 +7,7 @@ class ThreadsController extends Zend_Controller_Action
     public static $ForumsModel;
     public static $CategoryModel;
     public static $UserModel ;
+	private $identity = null;
 
     public function init()
     {
@@ -15,10 +16,23 @@ class ThreadsController extends Zend_Controller_Action
         $this->ForumsModel = new Application_Model_DbTable_ForumModel();
         $this->CategoryModel = new Application_Model_DbTable_CategoryModel();
         $this->UserModel = new Application_Model_DbTable_UserModel();
+		$this->identity = Zend_Auth::getInstance()->getIdentity();
     }
 
     public function indexAction()
     {
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin == '1') {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
+
         // action body
 
         $category_info  = $this->model->listThreads();
@@ -49,7 +63,6 @@ class ThreadsController extends Zend_Controller_Action
 
     public function addAction()
     {
-        // action body
 
         $data = $this->getRequest()->getParams();
         $form = new Application_Form_Thread();
@@ -69,7 +82,6 @@ class ThreadsController extends Zend_Controller_Action
         $form->forum_id->addMultiOptions($options);
 
 
-		
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
         $storage->read();
