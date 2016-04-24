@@ -7,12 +7,12 @@
 	echo " <div class='row'>";
 	//echo "<div class= 'col-lg-12'>";
 
-		for($i=0; $i<count($this->thread); $i++){
+		//for($i=0; $i<count($this->thread); $i++){
 
 			echo"<div class='panel panel-default'>";
 		    //echo "<div class='panel-heading'> thread no. ".$this->thread[$i]['id']."<p style='float:right'>".$this->thread[$i]['date']."<p>"."</div>";
 
-		    echo "<div class='panel-heading'> <h1 style='text-align:center'>".$this->thread[$i]['title']."</h1> </div>";
+		    echo "<div class='panel-heading'> <h1 style='text-align:center'>".$this->thread[0]['title']."</h1> </div>";
 
 		    /*
 		    echo "<div class='panel-body'>";
@@ -22,21 +22,21 @@
 
 			echo "<table border=0 class='table table-striped ' >" ;
 			echo '<tr><td><strong>By : '.$this->username.'</strong></td></tr>';
-			echo '<tr><td>'.$this->thread[$i]['body'].'</td></tr>';
+			echo '<tr><td>'.$this->thread[0]['body'].'</td></tr>';
 			if (isset($this->identity)) {
-				if ($this->identity->id == $this->thread[$i]['user_id'] || $this->identity->is_admin) {
-					echo '<tr><td><a href="'.$this->baseUrl().'/index.php/threads/edit/id/'.$this->thread[$i]['id'].'"><button class="btn btn-primary"> Edit </button></a>';
-					echo ' <a href="'.$this->baseUrl().'/index.php/threads/delete/id/'.$this->thread[$i]['id'].'"><button class="btn btn-danger"> Delete </button></a>';
+				if ($this->identity->id == $this->thread[0]['user_id'] || $this->identity->is_admin) {
+					echo '<tr><td><a href="'.$this->baseUrl().'/index.php/threads/edit/id/'.$this->thread[0]['id'].'"><button class="btn btn-primary"> Edit </button></a>';
+					echo ' <a href="'.$this->baseUrl().'/index.php/threads/delete/id/'.$this->thread[0]['id'].'"><button class="btn btn-danger"> Delete </button></a>';
 				}
 			}
 
-			 echo '<p style="float:right">'.$this->thread[$i]['date'].'</p></td></tr>';
+			 echo '<p style="float:right">'.$this->thread[0]['date'].'</p></td></tr>';
 			 //"<p style='float:right'>".$this->thread[$i]['date']."<p>"
 
 			echo "</tr>";
 			echo "</table>";
 
-		}
+		//}
 
 	//echo "</div>";
 	echo "</div>";
@@ -74,7 +74,7 @@
 	    echo "<div class='panel-body'>";
 	    echo "</div>";
 
-		echo "<table border=1 class='table table-striped'>" ;
+		echo "<table border=0 class='table table-striped'>" ;
 		//echo '<tr><td> Id: '.$this->posts[$i]['id'].'</td></tr>';
 		echo '<tr><td>post_id: '.$this->replies[$i]['thread_id'].'</td></tr>';
 		echo '<tr><td>user_id: '.$this->replies[$i]['user_id'].'</td></tr>';
