@@ -9,6 +9,9 @@ class UsersController extends Zend_Controller_Action
     {
         $this->userModel = new Application_Model_DbTable_UserModel();
 		$this->identity = Zend_Auth::getInstance()->getIdentity();
+		if (isset($this->identity)) {
+			$this->view->identity = $this->identity;
+		}
     }
 
     public function indexAction()
@@ -32,17 +35,7 @@ class UsersController extends Zend_Controller_Action
 
     public function addAction()
     {
-		if (isset($this->identity)) {
-			if ($this->identity->is_admin == '1') {
-				$this->view->identity = $this->identity;
-			}
-			else {
-				$this->redirect('home');
-			}
-		}
-		else {
-			$this->redirect('home');
-		}
+
 
     	$data = $this->getRequest()->getParams();
         $form = new Application_Form_Registeration();
@@ -79,17 +72,7 @@ class UsersController extends Zend_Controller_Action
 
     public function editAction()
     {
-		if (isset($this->identity)) {
-			if ($this->identity->is_admin == '1') {
-				$this->view->identity = $this->identity;
-			}
-			else {
-				$this->redirect('home');
-			}
-		}
-		else {
-			$this->redirect('home');
-		}
+
 
         $id = $this->getRequest()->getParam('id');
         $form = new Application_Form_Registeration();

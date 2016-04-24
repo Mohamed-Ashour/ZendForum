@@ -1,17 +1,13 @@
 <br /><br />
 
+<h1>3adeella Forums<small> </small></h1>
+<br>
+
+<a href="<?php echo $this->baseUrl('index.php/threads/add') ?>" class="btn btn-primary">Add Thread</a>
+
+<br><br>
 
 <?php
-//var_dump($this->threads);
-echo " <br> <br>" ;
-//var_dump($this->categories);
-echo " <br> <br>" ;
-//var_dump($this->forums);
-?>
-
-<?php
-
-
 	if($this->categories) {
 
 		for($i=0; $i<count($this->categories); $i++){

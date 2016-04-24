@@ -10,6 +10,17 @@ class SystemController extends Zend_Controller_Action
     {
         $this->SystemModel = new Application_Model_DbTable_SystemModel();
 		$this->identity = Zend_Auth::getInstance()->getIdentity();
+		if (isset($this->identity)) {
+			if ($this->identity->is_admin == '1') {
+				$this->view->identity = $this->identity;
+			}
+			else {
+				$this->redirect('home');
+			}
+		}
+		else {
+			$this->redirect('home');
+		}
     }
 
     public function indexAction()

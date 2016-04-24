@@ -17,7 +17,16 @@ class ThreadsController extends Zend_Controller_Action
         $this->CategoryModel = new Application_Model_DbTable_CategoryModel();
         $this->UserModel = new Application_Model_DbTable_UserModel();
 		$this->identity = Zend_Auth::getInstance()->getIdentity();
+		if (isset($this->identity)) {
+			$this->view->identity = $this->identity;
+		}
     }
+
+	public function userThreads()
+    {
+        $id = $this->getRequest()->getParam('id');
+    }
+
 
     public function indexAction()
     {

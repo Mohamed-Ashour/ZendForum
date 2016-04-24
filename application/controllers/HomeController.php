@@ -4,18 +4,21 @@ class HomeController extends Zend_Controller_Action
 {
 
     public static $ForumsModel = null;
-
     public static $CategoryModel = null;
-
     public static $UserModel = null;
-
     public static $ThreadModel = null;
-
     public static $ReplyModel = null;
+	private $identity = null;
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->identity = Zend_Auth::getInstance()->getIdentity();
+
+		if (isset($this->identity)) {
+			$this->view->identity = $this->identity;
+			
+		}
+
         $this->ThreadModel = new Application_Model_DbTable_ThreadModel();
         $this->ForumsModel = new Application_Model_DbTable_ForumModel();
         $this->CategoryModel = new Application_Model_DbTable_CategoryModel();
@@ -45,22 +48,22 @@ class HomeController extends Zend_Controller_Action
     public function forumAction()
     {
         $this->view->threads = $this->ThreadModel->listThreads();
-	
+
 		$forumId = $this->getRequest()->getParam('id');
 		$forums=$this->ForumsModel->selectForumById($forumId)[0];
- 	
+
 		$forums['threads'] = $this->ThreadModel->getForumThreads($forums['id']);
-       
+
 		for ($j=0; $j < count($forums['threads']) ; $j++) {
 			$forums['threads'][$j]['replys_count'] = count($this->ReplyModel->listThreadReplies($forums['threads'][$j]['id']));
 		}
-        for ($j=0; $j < count($forums['threads']); $j++) { 
+        for ($j=0; $j < count($forums['threads']); $j++) {
         	$name = $this->UserModel->getUserById($forums['threads'][$j]['user_id'])[0]['username'];
     	    $forums['threads'][$j]['username'] = $name;
-   		}	
+   		}
 
 
-	
+
 
 		$this->view->forums = $forums;
 
@@ -81,7 +84,3 @@ class HomeController extends Zend_Controller_Action
 
 
 }
-
-
-
-

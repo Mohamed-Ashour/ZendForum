@@ -8,6 +8,10 @@ class RepliesController extends Zend_Controller_Action
     {
         $this->identity = Zend_Auth::getInstance()->getIdentity();
 		$this->model = new Application_Model_DbTable_ReplyModel();
+
+		if (isset($this->identity)) {
+			$this->view->identity = $this->identity;
+		}
     }
 
 	public function addAction()
