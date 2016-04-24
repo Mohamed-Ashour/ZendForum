@@ -79,8 +79,8 @@ class HomeController extends Zend_Controller_Action
     	    $forums['threads'][$j]['username'] = $name;
    		}
 
-        
-        
+
+
         $stickyThreads=$this->ThreadModel->listStickyThreads();
         $nonStickyThreads=$this->ThreadModel->listNonStickyThreads();
         //echo var_dump($stickyThreads);
@@ -132,14 +132,12 @@ class HomeController extends Zend_Controller_Action
 
     }
 
-<<<<<<< HEAD
 	public function uthreadsAction()
 	{
 		$user_id = $this->getRequest()->getParam('id');
 		$this->view->threads = $this->ThreadModel->getUserThreads($user_id);
 
 	}
-=======
     public function deleteAction()
     {
         // action body
@@ -148,10 +146,10 @@ class HomeController extends Zend_Controller_Action
         if($id){
             $threadId = $this->ReplyModel->getThreadIdFromReply($id);
          if ($this->ReplyModel->deleteReply($id))
-            
+
             $this->redirect('home/thread/id/'.$threadId[0]['thread_id']);
-                            
-            
+
+
         } else {
             //$this->redirect("blog-x/details/id/".$postId['post_id']);
             $this->redirect('home/thread/id/'.$threadId['thread_id']);
@@ -163,30 +161,24 @@ class HomeController extends Zend_Controller_Action
         // action body
         $replyId = $this->getRequest()->getParam('id');
         $threadId = $this->ReplyModel->getThreadIdFromReply($replyId);
-        
+
         $form = new Application_Form_Reply();
-        
+
         $reply = $this->ReplyModel->getReplyById($threadId);
         $form->populate($reply[0]);
         print_r($reply[0]);
         //$form->setAction("users/index");
         $this->view->form = $form;
-        
+
         if($this->getRequest()->isPost()){
             $data = $this->getRequest()->getParams();
             if($form->isValid($data)){
                 if ($this->ReplyModel->editReply($threadId , $data))
                     $this->redirect('home/thread/id/'.$threadId['thread_id']);
-            }   
-        }   
-        
+            }
+        }
+
         $this->render('form');
     }
->>>>>>> 7bb390837cfc308151c91ad3df74707705e02cba
-
 
 }
-
-
-
-
