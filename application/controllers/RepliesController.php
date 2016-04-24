@@ -19,11 +19,17 @@ class RepliesController extends Zend_Controller_Action
     	$data = $this->getRequest()->getParams();
         $form = new Application_Form_Reply();
 
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $storage->read();
+        $userId=$storage->read()->id;
+        
+
         $this->view->form = $form;
         if($this->getRequest()->isPost()){
             if($form->isValid($data)){
-                if ($this->model->addReply($data))
-                    $this->redirect('replies');
+                if ($this->model->addReply($data , $user_id , $thread_id))
+                    $this->redirect('home/thread');
             }
         }
         $this->render('form');

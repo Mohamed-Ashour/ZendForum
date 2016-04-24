@@ -80,6 +80,15 @@ class HomeController extends Zend_Controller_Action
         $this->view->thread=$thread;
         //var_dump($thread);
 
+        /* *************************************************** */
+        
+        $data = $this->getRequest()->getParams();
+        $formReply = new Application_Form_Reply();
+
+        $this->view->form = $formReply;
+        
+        
+
     }
 
 
