@@ -79,7 +79,7 @@ class ThreadsController extends Zend_Controller_Action
 		if (isset($this->identity)) {
 			if (!$this->identity->is_admin) {
 				$form->removeElement('is_sticky');
-				$form->removeElement('is_open');
+				$form->removeElement('is_opened');
 			}
 		}
 		else {

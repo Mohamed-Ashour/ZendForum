@@ -6,17 +6,18 @@ class Application_Model_DbTable_ThreadModel extends Zend_Db_Table_Abstract
     protected $_name = 'thread';
 
     function addThread($userId,$data){
+		if (isset($data['module']))
+			unset( $data['module']) ;
+		if (isset($data['controller']))
+	 		unset( $data['controller']);
+		if (isset($data['action']))
+			unset( $data['action']);
+		if (isset($data['submit']))
+			unset($data['submit']);
 
-		$row = $this->createRow();
-		$row->title=$data['title'];
-		$row->body =$data['body'];
-		$row->is_sticky=$data['is_sticky'];
-		$row->is_opened=$data['is_opened'];
-		$row->forum_id=$data['forum_id'];
-		$row->user_id=$userId;
-		$row->category_id=$data['category_id'];
+		$data['user_id'] = $userId;
+		return $this->insert($data);
 
-		return $row->save();
 
 	}
 

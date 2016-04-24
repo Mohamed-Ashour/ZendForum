@@ -5,9 +5,12 @@ class UsersController extends Zend_Controller_Action
 
     private $userModel = null;
 	private $identity = null;
+	private $SystemModel = null;
+
     public function init()
     {
         $this->userModel = new Application_Model_DbTable_UserModel();
+		$this->SystemModel = new Application_Model_DbTable_SystemModel();
 		$this->identity = Zend_Auth::getInstance()->getIdentity();
 		if (isset($this->identity)) {
 			$this->view->identity = $this->identity;
@@ -153,8 +156,14 @@ class UsersController extends Zend_Controller_Action
             $authAdapter->setCredential(md5($password));
             $result = $authAdapter->authenticate();
 
-            if ($result->isValid()) {
+			// if (!$this->SystemModel->getState()) {
+			// 	echo "<p class='danger'>System is off now</p>";
+			// 	return;
+			// }
 
+
+
+            if ($result->isValid()) {
                 //if the user is valid register his info in session
                 $auth = Zend_Auth::getInstance();
                 $storage = $auth->getStorage();
@@ -162,7 +171,7 @@ class UsersController extends Zend_Controller_Action
                 $this->redirect('home');
 
             }else{
-                echo "user doesnt exist !!" ;
+                echo "<p>user doesnt exist !!</p>" ;
                 $formLogObj = new Application_Form_Login();
                 $this->view->form=$formLogObj;
             }
