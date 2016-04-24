@@ -25,7 +25,9 @@ class Application_Model_DbTable_ReplyModel extends Zend_Db_Table_Abstract
   		if (isset($data['action']))
   		 	unset( $data['action']);
   		if (isset($data['submit']))
-  		 	unset( $data['submit']);
+        unset( $data['submit']);
+      if (isset($data['id']))
+  		 	unset( $data['id']);
 
 		$data['user_id'] = $user_id;
 		$data['thread_id'] = $thread_id;

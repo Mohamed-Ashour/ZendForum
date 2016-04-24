@@ -1,7 +1,3 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Home</b> and script/action name <b>thread</b></p>
-</div>
 
 
 <?php if($this->thread) { 
@@ -9,12 +5,14 @@
 	//var_dump($this->thread);
 
 	echo " <div class='row'>";
-	echo "<div class= 'col-lg-8'>";		
+	//echo "<div class= 'col-lg-12'>";		
 
 		for($i=0; $i<count($this->thread); $i++){
 
 			echo"<div class='panel panel-default'>";
-		    echo "<div class='panel-heading'> thread no. ".$this->thread[$i]['id']."<p style='float:right'>".$this->thread[$i]['date']."<p>"."</div>";
+		    //echo "<div class='panel-heading'> thread no. ".$this->thread[$i]['id']."<p style='float:right'>".$this->thread[$i]['date']."<p>"."</div>";
+
+		    echo "<div class='panel-heading'> <h1 style='text-align:center'>".$this->thread[$i]['title']."</h1> </div>";
 		    
 		    /*
 		    echo "<div class='panel-body'>";
@@ -27,18 +25,67 @@
 			echo '<tr><td>username : '.$this->username.'</td></tr>';
 			echo '<tr><td>title: '.$this->thread[$i]['title'].'</td></tr>';
 			echo '<tr><td>body: '.$this->thread[$i]['body'].'</td></tr>';
-			 echo '<tr><td><a href="'.$this->baseUrl().'/index.php/threads/edit/id/'.$this->thread[$i]['id'].'"><button class="btn btn-primary"> Edit </button></a></td></tr>';
+			 echo '<tr><td><a href="'.$this->baseUrl().'/index.php/threads/edit/id/'.$this->thread[$i]['id'].'"><button class="btn btn-primary"> Edit </button></a>
+			 <p style="float:right">'.$this->thread[$i]['date'].'</p></td></tr>';
+			 //"<p style='float:right'>".$this->thread[$i]['date']."<p>"
 			
 			echo "</tr>";
 			echo "</table>";
 			
 		}
 		
-	echo "</div>";
+	//echo "</div>";
 	echo "</div>";	
-	echo "</div>";
+	//echo "</div>";
 	echo "</div>";
 	//echo "</div>";
 		
 	}
+
+
+echo " <div class='row'>";
+//echo "<div class= 'col-lg-8'>";		
+
+echo $this->form;
+
+//echo "</div>";
+echo "</div>";
+
+
+echo "<br>";
+
+//echo var_dump($this->replies);
+?>
+
+<div class="row">
+	<?php if($this->replies) { 
+
 	
+
+	for($i=0; $i<count($this->replies); $i++){
+		
+		echo"<div class='panel panel-default'>";
+	    echo "<div class='panel-heading'> comment no. ".$this->replies[$i]['id']."</div>";
+	    echo "<div class='panel-body'>";
+	    echo "</div>";
+
+		echo "<table border=1 class='table table-striped'>" ;	
+		//echo '<tr><td> Id: '.$this->posts[$i]['id'].'</td></tr>';
+		echo '<tr><td>post_id: '.$this->replies[$i]['thread_id'].'</td></tr>';
+		echo '<tr><td>user_id: '.$this->replies[$i]['user_id'].'</td></tr>';	
+		echo '<tr><td>text: '.$this->replies[$i]['text'].'</td></tr>';
+		//echo '<tr><td> <a  href="'.$this->baseUrl().'/index.php/blog-x/delete-Comment/id/'.$this->replies[$i]['id'].'"> <button class="btn btn-danger" >Delete</button> </a>';
+		
+		echo "</tr>";
+		//echo str_repeat('*', 100).'<br />';		
+		echo "</table>";
+
+		echo "</div>";
+
+		echo "<br>";
+	}
+	
+}
+
+?>
+</div>

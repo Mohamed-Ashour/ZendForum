@@ -7,11 +7,14 @@ class Application_Form_Reply extends Zend_Form
     {
         /* Form Elements & Other Definitions Here ... */
 
+        $this->setMethod('post');
+        //$this->setAction('index.php/Replies/add');
 
 		$text = new Zend_Form_Element_Textarea("text");
 		$text->setRequired();
-		$text->setAttrib('rows', '9');
-		$text->setAttrib('cols', '10');
+		$text->setAttrib('rows', '6');
+		$text->setAttrib('cols', '15');
+		$text->setAttrib('class', 'form-control');
 		$text->setAttrib("placeholder","Enter your reply");
 
 
